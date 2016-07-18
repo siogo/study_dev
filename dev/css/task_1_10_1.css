@@ -7,7 +7,7 @@
 .small_div4{ border: 1px solid blue;}
 
 @media screen and (max-width:640px) {
-	.content{display: flex; align-items: flex-start; flex-wrap: wrap;}
+	.content{display: flex; align-items: flex-start; flex-wrap: wrap; justify-content: space-between;}
 	.small_div1{ height: 120px; width: 150px; order:2}
 	.small_div2{ height: 100px; width: 150px; order:3}
 	.small_div3{ height: 40px; width: 150px; order:4}
