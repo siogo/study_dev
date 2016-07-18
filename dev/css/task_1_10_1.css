@@ -1,0 +1,15 @@
+.content{display: flex; align-items: center; justify-content: space-around; padding: 20px;}
+.small_div1{ height: 120px; width: 150px; margin-bottom: 20px;}
+.small_div2{ height: 100px; width: 150px; margin-bottom: 20px;}
+.small_div3{ height: 40px; width: 150px; margin-bottom: 20px;}
+.small_div4{ height: 200px; width: 150px; margin-bottom: 20px;}
+.small_div1,.small_div2,.small_div3{ border: 1px solid red;}
+.small_div4{ border: 1px solid blue;}
+
+@media screen and (max-width:640px) {
+	.content{display: flex; align-items: flex-start; flex-wrap: wrap;}
+	.small_div1{ height: 120px; width: 150px; order:2}
+	.small_div2{ height: 100px; width: 150px; order:3}
+	.small_div3{ height: 40px; width: 150px; order:4}
+	.small_div4{ height: 200px; width: 150px; order:1}
+}
