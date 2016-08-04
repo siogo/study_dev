@@ -43,7 +43,7 @@
 
 	function showArray(){
 		// js原生清空父元素下的子元素
-		clearDom();
+		document.getElementById("contentdiv").innerHTML = "";
 		var contentdiv = document.getElementById('contentdiv');
 		for (var i = 0; i < queue.length; i++) {
 			var spanNode = document.createElement('span');
@@ -57,6 +57,7 @@
 
 	function clearDom(){
 		document.getElementById("contentdiv").innerHTML = "";
+		queue.length = 0;
 	}
 
 	leftenter.onclick = function(){
