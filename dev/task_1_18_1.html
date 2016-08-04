@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>task_1_18_1</title>
+	<meta charset="utf-8">
+	<style>
+		#inputtext{ height: 25px; width: 260px; margin-bottom: 10px; }
+		#contentdiv{ height: 30px; margin-top: 20px;}
+		#contentdiv span{ display: inline-block; height: 30px; width: 30px; line-height: 30px; text-align: center; background-color: red; color: #fff; margin-right: 10px;}
+	</style>
+</head>
+<body>
+	<input type="text" id="inputtext"></input><br />
+	<input type="button" value="左侧入" id="leftenter"></input>
+	<input type="button" value="右侧入" id="rightenter"></input>
+	<input type="button" value="左侧出" id="leftout"></input>
+	<input type="button" value="右侧出" id="rightout"></input>
+	<div id="contentdiv">
+		
+	</div>
+<script>
+	var leftenter = document.getElementById('leftenter');
+	var rightenter = document.getElementById('rightenter');
+	var leftout = document.getElementById('leftout');
+	var rightout = document.getElementById('rightout');
+	var textValue = document.getElementById('inputtext').value;
+
+	var queue = new Array();
+
+	function getValue(){
+		if(document.getElementById('inputtext').value){
+			return parseInt(document.getElementById('inputtext').value);
+		}else{
+			return '';
+		}		
+	}
+
+	function showArray(){
+		// js原生清空父元素下的子元素
+		document.getElementById("contentdiv").innerHTML = "";
+		var contentdiv = document.getElementById('contentdiv');
+		for (var i = 0; i < queue.length; i++) {
+			var spanNode = document.createElement('span');
+			var spanText = document.createTextNode(queue[i]);
+			spanNode.appendChild(spanText);
+			contentdiv.appendChild(spanNode);
+		}
+		document.getElementById('inputtext').value = "";
+	}
+
+	leftenter.onclick = function(){
+		var textValue = getValue();
+		if(textValue == ''){
+
+		}else{
+			var length = queue.length;
+			length = length + 1;
+			for (var i = length - 1; i >= 0; i--) {
+				queue[i] = queue[i-1];
+			}
+			queue[0] = textValue;
+			showArray();	
+		}		
+	}
+
+	rightenter.onclick = function(){
+		var textValue = getValue();
+		if(textValue == ''){
+
+		}else{
+			queue.push(textValue);
+			showArray();		
+		}	
+	}
+
+	leftout.onclick = function(){
+		for (var i = 0; i < queue.length; i++) {
+			queue[i] = queue[i+1];
+		}
+		queue.pop();
+		showArray();
+	}
+
+	rightout.onclick = function(){
+		queue.pop();
+		showArray();
+	} 
+</script>
+</body>
+</html>
