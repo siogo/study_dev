@@ -17,6 +17,7 @@
 	<input type="button" value="右侧出" id="rightout"></input>
 	<input type="button" value="随机60" id="random"></input>
 	<input type="button" value="排序" id="sorting"></input>
+	<input type="button" value="清空" id="clear" onclick="clearDom()"></input>
 	<div id="contentdiv">
 		
 	</div>
@@ -27,6 +28,7 @@
 	var rightout = document.getElementById('rightout');
 	var random = document.getElementById('random');
 	var sorting = document.getElementById('sorting');
+	var clear = document.getElementById('clear');
 	var textValue = document.getElementById('inputtext').value;
 
 	var queue = new Array();
@@ -41,7 +43,7 @@
 
 	function showArray(){
 		// js原生清空父元素下的子元素
-		document.getElementById("contentdiv").innerHTML = "";
+		clearDom();
 		var contentdiv = document.getElementById('contentdiv');
 		for (var i = 0; i < queue.length; i++) {
 			var spanNode = document.createElement('span');
@@ -51,6 +53,10 @@
 			contentdiv.appendChild(spanNode);
 		}
 		document.getElementById('inputtext').value = "";
+	}
+
+	function clearDom(){
+		document.getElementById("contentdiv").innerHTML = "";
 	}
 
 	leftenter.onclick = function(){
@@ -103,7 +109,7 @@
 		var i = 0,j = 0,temp;
 		var len = queue.length;
 		var timer = null;
-		timer = setInterval(run,100);
+		timer = setInterval(run,5);
 		function run(){
 			if(i < len){
 				if(j < len){
