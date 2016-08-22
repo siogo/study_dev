@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>雷霆战机</title>
+<style>
+* { padding:0; margin:0;}
+body {background:black;}
+#interface { width:320px; height:568px; background:url(images/background_2.png); margin:0px auto; position:relative; overflow:hidden;}
+#gamebtn { width:100px; height:30px; border:1px solid #999; text-align:center; line-height:30px; font-size:20px; cursor:pointer; position:absolute; top:269px; left:110px;}
+
+.score { color:#000; z-index:-1; width:320px; background:green; margin:20px auto 0px auto;}
+.air1 { width:40px; height:49px; background:url(images/hero_fly_1.png) no-repeat; position:absolute;bottom:0px; left:140px;}
+.bullet { width:6px; overflow:hidden; height:14px; background:url(images/bullet1.png) no-repeat; position:absolute;}
+.enemy1{ width:34px; height:24px; background:url(images/enemy1_fly_1.png) no-repeat; }
+.enemy2{ width:23px; height:40px; background:url(images/enemy4_fly_1.png) no-repeat; }
+
+.e_bomb { width:38px; height:34px; background:url(images/enemy1_blowup_3.png)}
+
+.boss { width:110px; height:164px; background:url(images/enemy2_fly_1.png) no-repeat;}
+.bomb { width:320px; height:36px; background:url(images/bomb1.png) ; position:absolute;}
+
+.zidan { width:10px; height:14px; background:url(images/bullet0.png) no-repeat 0 0;}
+</style>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/dome.js"></script>
+<script>
+	$(function(){
+		$("#gamebtn").click(function(){
+			$(this).hide();	
+			Game.init();
+		})	
+	})
+</script>
+</head>
+
+<body>
+	<div id="interface">
+    	<div id="gamebtn">开始游戏</div>
+    </div>
+</body>
+</html>
