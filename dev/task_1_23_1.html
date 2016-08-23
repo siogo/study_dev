@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>task_1_23_1</title>
+	<meta charset="utf-8">
+	<style>
+		div{border: 1px solid #000; margin: 10px; float: left;}
+		#parents_four{ height: 30px; width: 40px; }
+		#parents_five{ height: 10px; width: 20px; }
+	</style>
+</head>
+<body>
+	<div id="parents_one">
+		<div id="parents_two">
+			<div id="parents_three">
+				<div id="parents_four"></div>
+				<div id="parents_four"></div>
+			</div>
+			<div id="parents_three">
+				<div id="parents_four"></div>
+				<div id="parents_four"></div>
+				<div id="parents_four"></div>
+			</div>
+			<div id="parents_three">
+				<div id="parents_four"></div>
+			</div>
+		</div>
+		<div id="parents_two">
+			<div id="parents_three">
+				<div id="parents_four"></div>
+			</div>
+			<div id="parents_three">
+				<div id="parents_four"></div>
+				<div id="parents_four">
+					<div id="parents_five"></div>
+				</div>
+			</div>
+			<div id="parents_three">
+				<div id="parents_four"></div>
+				<div id="parents_four"></div>
+			</div>
+		</div>
+	</div>
+	
+	<input type="button" value="前序"></input>
+	<input type="button" value="中序"></input>
+	<input type="button" value="后序"></input>
+<script type="text/javascript">
+	var rootDom = document.getElementById('parents_one');
+	var btn1 = document.getElementsByTagName('input')[0];
+	var btn2 = document.getElementsByTagName('input')[1];
+	var btn3 = document.getElementsByTagName('input')[2];
+	var divList = [];
+
+	function preOrder(node) {
+		if (!(node == null)) {
+			divList.push(node);
+			var childNode = node.children;
+			for (var i = 0; i < childNode.length; i++) {
+				preOrder(childNode[i]);
+			}
+			// preOrder(node.firstElementChild);
+			// preOrder(node.lastElementChild);
+		}
+	}
+
+	function changeColor(){
+		var i = 0;
+		divList[i].style.backgroundColor = 'blue';
+		var timer = setInterval(function(){
+			i++;			
+			if(i < divList.length){
+				divList[i-1].style.backgroundColor = '#fff';
+				divList[i].style.backgroundColor = 'blue';
+			}else{
+				clearInterval(timer);
+				divList[divList.length-1].style.backgroundColor = '#fff';
+			}
+			
+		},500)
+	}
+
+	btn1.onclick = function(){
+		preOrder(rootDom);
+		console.log(divList);
+		changeColor();
+	}
+</script>
+</body>
+</html>
