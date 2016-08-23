@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>task_1_22_1</title>
+	<meta charset="utf-8">
+	<style>
+		div{border: 1px solid #000; margin: 10px; float: left;}
+		#parents_four{ height: 30px; width: 40px; }
+	</style>
+</head>
+<body>
+	<div id="parents_one">
+		<div id="parents_two">
+			<div id="parents_three">
+				<div id="parents_four"></div>
+				<div id="parents_four"></div>
+			</div>
+			<div id="parents_three">
+				<div id="parents_four"></div>
+				<div id="parents_four"></div>
+			</div>
+		</div>
+		<div id="parents_two">
+			<div id="parents_three">
+				<div id="parents_four"></div>
+				<div id="parents_four"></div>
+			</div>
+			<div id="parents_three">
+				<div id="parents_four"></div>
+				<div id="parents_four"></div>
+			</div>
+		</div>
+	</div>
+	
+	<input type="button" value="前序"></input>
+	<input type="button" value="中序"></input>
+	<input type="button" value="后序"></input>
+<script>
+	var rootDom = document.getElementById('parents_one');
+	var btn1 = document.getElementsByTagName('input')[0];
+	var btn2 = document.getElementsByTagName('input')[1];
+	var btn3 = document.getElementsByTagName('input')[2];
+	divList = [];
+	// 前序
+	function preOrder(node) {
+		if (!(node == null)) {
+			divList.push(node);
+			preOrder(node.firstElementChild);
+			preOrder(node.lastElementChild);
+		}
+	}
+
+	btn1.onclick = function(){
+		preOrder(rootDom);
+		console.log(divList);
+	}
+</script>
+</body>
+</html>
