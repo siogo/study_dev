@@ -13,7 +13,8 @@ $(document).ready(function(){
 	}
 
 	function SNAKE(){
-		this.length = 5;
+		this.arr = Array();
+		// this.length = 5;
 		// 方向2,4,6,8
 		this.dir = 6;
 	}
@@ -22,15 +23,18 @@ $(document).ready(function(){
 	// 蛇初始化
 	var smallsnake = new SNAKE();
 	var snakehead = $("td[data-coord='24,49']");
-	snakehead.attr("data-head",'yes');
+	// snakehead.attr("data-head",'yes');
 	snakehead.css("background-color", '#000');
 	console.log(snakehead.attr('data-coord'));
 
 	if(smallsnake.dir == 6){
 		for (let i = 49; i > 44; i--) {
 			$("td[data-coord='24,"+i+"']").css("background-color","#000");
+			smallsnake.arr.push($("td[data-coord='24,"+i+"']"));
 		}
 	}
+
+	$(smallsnake.arr[0].attr("data-head",'yes'));
 
 	// var runTime = setInterval(function(){
 	// 	$('td').css("background-color","#fff");
@@ -49,6 +53,21 @@ $(document).ready(function(){
 	// 	}
 	// },1000);
 
+	// var runTime = setInterval(function(){
+		// $('td').css("background-color","#fff");
+		let runCoord = $("td[data-head='yes']").attr('data-coord');
+		let splitStr = runCoord.split(',');
+		let coordAbs = parseInt(splitStr[0]);
+		let coordOrd = parseInt(splitStr[1]);
+		coordOrd = coordOrd+1;
+		$("td[data-head='yes']").removeAttr("data-head");
+		if(smallsnake.dir == 6){
+			for (var i = 0; i < smallsnake.arr.length; i++) {
+				// $(smallsnake.arr[i]).;
+			}
+		}
+	// },1000);
+
 
 // 37zuo  39you  38shang  40xia
 	$(document).keydown(function(event){
@@ -57,4 +76,12 @@ $(document).ready(function(){
 		}
 		console.log(event.keyCode);
 	});
+
+	function turnUp(){
+		let runCoord = $("td[data-head='yes']").attr('data-coord');
+		let splitStr = runCoord.split(',');
+		let coordAbs = parseInt(splitStr[0]);
+		let coordOrd = parseInt(splitStr[1]);
+
+	}
 })
