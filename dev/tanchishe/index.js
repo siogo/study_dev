@@ -22,11 +22,31 @@ $(document).ready(function(){
 	// 24,49
 	var smallsnake = new SNAKE();
 	var snakehead = $("td[data-coord='24,49']");
+	snakehead.attr("data-head",'yes');
 	smallsnake.arr.push(snakehead);
+	snakehead.css("background-color", '#000');
 	console.log(snakehead.attr('data-coord'));
 
 	if(smallsnake.dir == 6){
-
+		for (let i = 49; i > 44; i--) {
+			$("td[data-coord='24,"+i+"']").css("background-color","#000");
+		}
 	}
 	console.log(smallsnake.arr);
+	var runTime = setInterval(function(){
+		$('td').css("background-color","#fff");
+		let runCoord = $("td[data-head='yes']").attr('data-coord');
+		let splitStr = runCoord.split(',');
+		let coordAbs = parseInt(splitStr[0]);
+		let coordOrd = parseInt(splitStr[1]);
+		coordOrd = coordOrd+1;
+		$("td[data-head='yes']").removeAttr("data-head");
+		if(smallsnake.dir == 6){
+			$('td').css("background-color","#fff");
+			for (let i = coordOrd; i > coordOrd-5; i--) {
+				$("td[data-coord='"+coordAbs+","+i+"']").css("background-color","#000");
+			}
+			$("td[data-coord='"+coordAbs+","+coordOrd+"']").attr("data-head",'yes');
+		}
+	},1000);
 })
