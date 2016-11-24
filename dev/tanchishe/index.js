@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	// 创建场地
+	var coordAbs,coordOrd,runTime;
 	var tablecont = $('#container');
 	var atr = "<tr></tr>";
 	var atd = "<td data-coord=''></td>";
@@ -14,74 +15,91 @@ $(document).ready(function(){
 
 	function SNAKE(){
 		this.arr = Array();
-		// this.length = 5;
-		// 方向2,4,6,8
 		this.dir = 6;
 	}
 
 	// 24,49
 	// 蛇初始化
 	var smallsnake = new SNAKE();
-	var snakehead = $("td[data-coord='24,49']");
-	// snakehead.attr("data-head",'yes');
-	snakehead.css("background-color", '#000');
-	console.log(snakehead.attr('data-coord'));
 
 	if(smallsnake.dir == 6){
 		for (let i = 49; i > 44; i--) {
-			$("td[data-coord='24,"+i+"']").css("background-color","#000");
+			// $("td[data-coord='24,"+i+"']").css("background-color","#000");
 			smallsnake.arr.push($("td[data-coord='24,"+i+"']"));
 		}
 	}
-
-	$(smallsnake.arr[0].attr("data-head",'yes'));
-
-	// var runTime = setInterval(function(){
-	// 	$('td').css("background-color","#fff");
-	// 	let runCoord = $("td[data-head='yes']").attr('data-coord');
-	// 	let splitStr = runCoord.split(',');
-	// 	let coordAbs = parseInt(splitStr[0]);
-	// 	let coordOrd = parseInt(splitStr[1]);
-	// 	coordOrd = coordOrd+1;
-	// 	$("td[data-head='yes']").removeAttr("data-head");
-	// 	if(smallsnake.dir == 6){
-	// 		$('td').css("background-color","#fff");
-	// 		for (let i = coordOrd; i > coordOrd-5; i--) {
-	// 			$("td[data-coord='"+coordAbs+","+i+"']").css("background-color","#000");
-	// 		}
-	// 		$("td[data-coord='"+coordAbs+","+coordOrd+"']").attr("data-head",'yes');
-	// 	}
-	// },1000);
-
-	// var runTime = setInterval(function(){
-		// $('td').css("background-color","#fff");
-		let runCoord = $("td[data-head='yes']").attr('data-coord');
-		let splitStr = runCoord.split(',');
-		let coordAbs = parseInt(splitStr[0]);
-		let coordOrd = parseInt(splitStr[1]);
-		coordOrd = coordOrd+1;
-		$("td[data-head='yes']").removeAttr("data-head");
-		if(smallsnake.dir == 6){
-			for (var i = 0; i < smallsnake.arr.length; i++) {
-				// $(smallsnake.arr[i]).;
-			}
-		}
-	// },1000);
-
+	addColor(smallsnake.arr);
 
 // 37zuo  39you  38shang  40xia
 	$(document).keydown(function(event){
-		if(event.keyCode == 37){
-
+		switch (event.keyCode) {
+			case (40):
+				control(40);
+				break;
+			case (39):
+				control(39);
+				break;
+			case (38):
+				control(38);
+				break;
+			case (37):
+				control(37);
+				break;
 		}
-		console.log(event.keyCode);
 	});
 
-	function turnUp(){
-		let runCoord = $("td[data-head='yes']").attr('data-coord');
-		let splitStr = runCoord.split(',');
+	function addColor(obj){
+		for (let i = 0; i < obj.length; i++) {
+			$(obj[i]).css("background","#000");
+		}
+	}
+
+	function subColor(obj){
+		for (let i = 0; i < obj.length; i++) {
+			$(obj[i]).css("background","#fff");
+		}
+	}
+
+	function strSplit(obj,num){
+		let splitStr = obj.split(',');
 		let coordAbs = parseInt(splitStr[0]);
 		let coordOrd = parseInt(splitStr[1]);
+		if(num == 1){
+			return coordOrd;
+		}
+		if(num == 0){
+			return coordAbs;
+		}
+	}
 
+	function control(dir){
+		clearInterval(runTime);
+		runTime = setInterval(function(){
+			subColor(smallsnake.arr);
+			let runCoord = $(smallsnake.arr[0]).attr('data-coord');
+			coordAbs = strSplit(runCoord,0);
+			coordOrd = strSplit(runCoord,1);
+
+				switch (dir) {
+					case (40):
+						coordAbs = coordAbs+1;
+						break;
+					case (39):
+						coordOrd = coordOrd+1;
+						break;
+					case (38):
+						coordAbs = coordAbs-1;
+						break;
+					case (37):
+						coordOrd = coordOrd-1;
+						break;
+				}
+			smallsnake.arr.unshift($("td[data-coord='"+coordAbs+","+coordOrd+"']"));
+			for (let i = smallsnake.arr.length-1; i > 0; i--) {
+				smallsnake.arr[i] = smallsnake.arr[i-1];
+			}
+			smallsnake.arr.shift();
+			addColor(smallsnake.arr);
+		},100);
 	}
 })
