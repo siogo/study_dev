@@ -72,6 +72,12 @@ $(document).ready(function(){
 		}
 	}
 
+	function numSuiji(num){
+		return parseInt(Math.floor(Math.random()*num));
+	}
+
+	console.log(numSuiji(99));
+
 	function control(dir){
 		clearInterval(runTime);
 		runTime = setInterval(function(){
@@ -79,27 +85,40 @@ $(document).ready(function(){
 			let runCoord = $(smallsnake.arr[0]).attr('data-coord');
 			coordAbs = strSplit(runCoord,0);
 			coordOrd = strSplit(runCoord,1);
-
-				switch (dir) {
-					case (40):
-						coordAbs = coordAbs+1;
-						break;
-					case (39):
-						coordOrd = coordOrd+1;
-						break;
-					case (38):
-						coordAbs = coordAbs-1;
-						break;
-					case (37):
-						coordOrd = coordOrd-1;
-						break;
-				}
-			smallsnake.arr.unshift($("td[data-coord='"+coordAbs+","+coordOrd+"']"));
-			for (let i = smallsnake.arr.length-1; i > 0; i--) {
-				smallsnake.arr[i] = smallsnake.arr[i-1];
+			switch (dir) {
+				case (40):
+					coordAbs = coordAbs+1;
+					break;
+				case (39):
+					coordOrd = coordOrd+1;
+					break;
+				case (38):
+					coordAbs = coordAbs-1;
+					break;
+				case (37):
+					coordOrd = coordOrd-1;
+					break;
 			}
-			smallsnake.arr.shift();
-			addColor(smallsnake.arr);
+			if(coordOrd==101){
+				alert(1);
+				clearInterval(runTime);
+			}else if(coordOrd==-1){
+				alert(1);
+				clearInterval(runTime);
+			}else if(coordAbs==-1){
+				alert(1);
+				clearInterval(runTime);
+			}else if(coordAbs==51){
+				alert(1);
+				clearInterval(runTime);
+			}else{
+				smallsnake.arr.unshift($("td[data-coord='"+coordAbs+","+coordOrd+"']"));
+				for (let i = smallsnake.arr.length-1; i > 0; i--) {
+					smallsnake.arr[i] = smallsnake.arr[i-1];
+				}
+				smallsnake.arr.shift();
+				addColor(smallsnake.arr);
+			}
 		},100);
 	}
 })
