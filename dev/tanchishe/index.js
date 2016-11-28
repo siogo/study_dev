@@ -16,37 +16,42 @@ $(document).ready(function(){
 	function SNAKE(){
 		this.arr = Array();
 		this.dir = 6;
+		this.contr = dirControl(this);
 	}
 
-	// 24,49
-	// 蛇初始化
-	var smallsnake = new SNAKE();
+	function FOOD(){
 
-	if(smallsnake.dir == 6){
-		for (let i = 49; i > 44; i--) {
-			// $("td[data-coord='24,"+i+"']").css("background-color","#000");
-			smallsnake.arr.push($("td[data-coord='24,"+i+"']"));
+	}
+
+	function init(){
+		var smallsnake = new SNAKE();
+		var headloca = numSuiji(94,5);
+		var bbb = numSuiji(49,0);
+		for (let i = headloca; i > headloca-5; i--) {
+			smallsnake.arr.push($("td[data-coord='"+bbb+","+i+"']"));
 		}
+		addColor(smallsnake.arr);
+		smallsnake.contr;
 	}
-	addColor(smallsnake.arr);
 
-// 37zuo  39you  38shang  40xia
-	$(document).keydown(function(event){
+	function dirControl(obj){
+		$(document).keydown(function(event){
 		switch (event.keyCode) {
 			case (40):
-				control(40);
+				control(40,obj);
 				break;
 			case (39):
-				control(39);
+				control(39,obj);
 				break;
 			case (38):
-				control(38);
+				control(38,obj);
 				break;
 			case (37):
-				control(37);
+				control(37,obj);
 				break;
-		}
-	});
+			}
+		});
+	}
 
 	function addColor(obj){
 		for (let i = 0; i < obj.length; i++) {
@@ -72,17 +77,15 @@ $(document).ready(function(){
 		}
 	}
 
-	function numSuiji(num){
-		return parseInt(Math.floor(Math.random()*num));
+	function numSuiji(num,j){
+		return parseInt(Math.floor(Math.random()*num+j));
 	}
 
-	console.log(numSuiji(99));
-
-	function control(dir){
+	function control(dir,obj){
 		clearInterval(runTime);
 		runTime = setInterval(function(){
-			subColor(smallsnake.arr);
-			let runCoord = $(smallsnake.arr[0]).attr('data-coord');
+			subColor(obj.arr);
+			let runCoord = $(obj.arr[0]).attr('data-coord');
 			coordAbs = strSplit(runCoord,0);
 			coordOrd = strSplit(runCoord,1);
 			switch (dir) {
@@ -99,26 +102,26 @@ $(document).ready(function(){
 					coordOrd = coordOrd-1;
 					break;
 			}
-			if(coordOrd==101){
+
+			obj.arr.unshift($("td[data-coord='"+coordAbs+","+coordOrd+"']"));
+			let headCoord = $(obj.arr[0]).attr('data-coord');
+			console.log(headCoord);
+			if(headCoord == undefined){
 				alert(1);
-				clearInterval(runTime);
-			}else if(coordOrd==-1){
-				alert(1);
-				clearInterval(runTime);
-			}else if(coordAbs==-1){
-				alert(1);
-				clearInterval(runTime);
-			}else if(coordAbs==51){
-				alert(1);
-				clearInterval(runTime);
+				init();
 			}else{
-				smallsnake.arr.unshift($("td[data-coord='"+coordAbs+","+coordOrd+"']"));
-				for (let i = smallsnake.arr.length-1; i > 0; i--) {
-					smallsnake.arr[i] = smallsnake.arr[i-1];
+				for (let i = obj.arr.length-1; i > 0; i--) {
+					obj.arr[i] = obj.arr[i-1];
 				}
-				smallsnake.arr.shift();
-				addColor(smallsnake.arr);
+				obj.arr.shift();
+				addColor(obj.arr);
 			}
 		},100);
 	}
+
+	init();
 })
+
+
+单页纸：70-257mm
+连续纸：76.2-254mm
