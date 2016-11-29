@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	// 创建场地
-	var coordAbs,coordOrd,runTime;
+	var coordAbs,coordOrd,runTime,food;
 	var tablecont = $('#container');
 	var atr = "<tr></tr>";
 	var atd = "<td data-coord=''></td>";
@@ -20,11 +20,19 @@ $(document).ready(function(){
 	}
 
 	function FOOD(){
-
+		this.hengcoord = numSuiji(49,0);
+		this.zongcoord = numSuiji(99,0);
+		this.foodarr = Array();
+		$("td[data-coord='"+this.hengcoord+","+this.zongcoord+"']").attr('data-food','food');
+		this.foodarr.push($("td[data-coord='"+this.hengcoord+","+this.zongcoord+"']"));
+		addColor(this.foodarr);
 	}
+
+
 
 	function init(){
 		var smallsnake = new SNAKE();
+		food = new FOOD();
 		var headloca = numSuiji(94,5);
 		var bbb = numSuiji(49,0);
 		for (let i = headloca; i > headloca-5; i--) {
@@ -102,26 +110,33 @@ $(document).ready(function(){
 					coordOrd = coordOrd-1;
 					break;
 			}
-
-			obj.arr.unshift($("td[data-coord='"+coordAbs+","+coordOrd+"']"));
-			let headCoord = $(obj.arr[0]).attr('data-coord');
-			console.log(headCoord);
-			if(headCoord == undefined){
-				alert(1);
-				init();
+			var flag = $("td[data-coord='"+coordAbs+","+coordOrd+"']").attr('data-food');
+			if(flag == 'food'){
+				obj.arr.unshift($("td[data-coord='"+coordAbs+","+coordOrd+"']"));
+				$("td[data-coord='"+coordAbs+","+coordOrd+"']").removeAttr('data-food');
+				food = new FOOD();
 			}else{
-				for (let i = obj.arr.length-1; i > 0; i--) {
-					obj.arr[i] = obj.arr[i-1];
+				obj.arr.unshift($("td[data-coord='"+coordAbs+","+coordOrd+"']"));
+				let headCoord = $(obj.arr[0]).attr('data-coord');
+				if(headCoord == undefined){
+					clearInterval(runTime);
+					alert("GAME OVER!!");
+					subColor(food.foodarr);
+					food.foodarr = null;
+					// console.log(food.foodarr);
+					// subColor(food.foodarr);
+					init();
+				}else{
+					for (let i = obj.arr.length-1; i > 0; i--) {
+						obj.arr[i] = obj.arr[i-1];
+					}
+					obj.arr.shift();
+					addColor(obj.arr);
 				}
-				obj.arr.shift();
-				addColor(obj.arr);
 			}
+
 		},100);
 	}
 
 	init();
 })
-
-
-单页纸：70-257mm
-连续纸：76.2-254mm
