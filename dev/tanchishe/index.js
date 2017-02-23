@@ -28,8 +28,6 @@ $(document).ready(function(){
 		addColor(this.foodarr);
 	}
 
-
-
 	function init(){
 		var smallsnake = new SNAKE();
 		food = new FOOD();
@@ -123,8 +121,6 @@ $(document).ready(function(){
 					alert("GAME OVER!!");
 					subColor(food.foodarr);
 					food.foodarr = null;
-					// console.log(food.foodarr);
-					// subColor(food.foodarr);
 					init();
 				}else{
 					for (let i = obj.arr.length-1; i > 0; i--) {

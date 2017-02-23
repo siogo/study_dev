@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>task_1_21_1</title>
+	<meta charset="utf-8">
+	<style>
+		#inputtext{ height: 25px; width: 260px; margin-bottom: 10px; }
+		#contentdiv{ height: 30px; margin-top: 20px;}
+		#contentdiv span{ display: inline-block; height: 30px; line-height: 30px; text-align: center; background-color: red; color: #fff; margin-right: 10px;}
+	</style>
+</head>
+<body>
+	Tag: <input type="text" id="inputtext"></input>
+	<input type="button" id="addTag" value="添加标签"></input>
+	<div id="contentdiv">
+		
+	</div>
+<script>
+
+	var addTag = document.getElementById('addTag');
+	var queue = new Array();
+
+	function getValue(){	
+		var value = document.getElementById('inputtext').value;
+		// 理解这个正则表达式
+		var valueStr = value.split(/[^0-9a-zA-Z\u4e00-\u9fa5]+/);
+		if(value){
+			return valueStr;
+		}else{
+			return '';
+		}				
+	}
+
+	function showArray(){
+		// js原生清空父元素下的子元素
+		document.getElementById("contentdiv").innerHTML = "";
+		var contentdiv = document.getElementById('contentdiv');
+		for (var i = 0; i < queue.length; i++) {
+			var spanNode = document.createElement('span');
+			var spanText = document.createTextNode(queue[i]);
+			spanNode.appendChild(spanText);
+			contentdiv.appendChild(spanNode);
+		}
+		document.getElementById('inputtext').value = "";
+	}
+
+	addTag.onclick = function(){
+		var addvalue = getValue();
+		for (var i = 0; i < addvalue.length; i++) {
+			if(addvalue[i] === addvalue[i+1]){
+				console.log(1);
+			}else{
+				console.log('yes');
+			}
+			
+		}
+		showArray();
+	}
+	
+</script>
+</body>
+</html>

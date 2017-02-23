@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>task_1_20_1</title>
+	<meta charset="utf-8">
+	<style>
+		#inputtext{ height: 50px; width: 260px; margin-bottom: 10px; }
+		#contentdiv{ height: 30px; margin-top: 20px;}
+		#contentdiv span{ display: inline-block; height: 30px; line-height: 30px; text-align: center; background-color: red; color: #fff; margin-right: 10px;}
+	</style>
+</head>
+<body>
+	<textarea id="inputtext"></textarea><br />
+	<input type="button" value="左侧入" id="leftenter"></input>
+	<input type="button" value="右侧入" id="rightenter"></input>
+	<input type="button" value="左侧出" id="leftout"></input>
+	<input type="button" value="右侧出" id="rightout"></input>
+	<input type="text" id="searchtext"></input>
+	<input type="button" id="search" value="搜索"></input>
+	<div id="contentdiv">
+		
+	</div>
+<script>
+	var leftenter = document.getElementById('leftenter');
+	var rightenter = document.getElementById('rightenter');
+	var leftout = document.getElementById('leftout');
+	var rightout = document.getElementById('rightout');
+	var textValue = document.getElementById('inputtext').value;
+	var search = document.getElementById('search');
+
+	var queue = new Array();
+
+	function getValue(selector){
+		if(selector == inputtext){
+			var value = document.getElementById('inputtext').value;
+		}else{
+			var value = document.getElementById('searchtext').value;
+		}
+		// var value = document.getElementById('inputtext').value;
+		// 理解这个正则表达式
+		var valueStr = value.split(/[^0-9a-zA-Z\u4e00-\u9fa5]+/);
+		if(value){
+			return valueStr;
+		}else{
+			return '';
+		}				
+	}
+
+	function showArray(){
+		// js原生清空父元素下的子元素
+		document.getElementById("contentdiv").innerHTML = "";
+		var contentdiv = document.getElementById('contentdiv');
+		for (var i = 0; i < queue.length; i++) {
+			var spanNode = document.createElement('span');
+			var spanText = document.createTextNode(queue[i]);
+			spanNode.appendChild(spanText);
+			contentdiv.appendChild(spanNode);
+		}
+		document.getElementById('inputtext').value = "";
+	}
+
+	leftenter.onclick = function(){
+		var textValue = getValue(inputtext);
+		if(textValue == ''){
+
+		}else{
+			var valueLength = textValue.length;
+			var length = queue.length;
+			length = length + valueLength;
+			for (var i = length - 1; i >= 0; i--) {
+				queue[i] = queue[i-1];
+			}
+			for (var i = 0; i < valueLength; i++) {
+				queue[i] = textValue[i];
+			}
+			showArray();	
+		}		
+	}
+
+	rightenter.onclick = function(){
+		var textValue = getValue(inputtext);
+		if(textValue == ''){
+
+		}else{
+			var valueLength = textValue.length;
+			for (var i = 0; i < valueLength; i++) {
+				queue.push(textValue[i]);
+			}	
+			showArray();		
+		}	
+	}
+
+	leftout.onclick = function(){
+		for (var i = 0; i < queue.length; i++) {
+			queue[i] = queue[i+1];
+		}
+		queue.pop();
+		showArray();
+	}
+
+	rightout.onclick = function(){
+		queue.pop();
+		showArray();
+	} 
+
+	search.onclick = function(){
+		var searchtext = getValue(searchtext)[0];
+		for (var i = 0; i < queue.length; i++) {
+			// 正则表达式对象
+			var matchText = queue[i].match(new RegExp(searchtext, "g"));
+			console.log(matchText);
+		}
+	}
+</script>
+</body>
+</html>
