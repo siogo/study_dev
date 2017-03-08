@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<div id="app-7">
+		<ol>
+		<!-- item是定义的一个变量 然后将这个变量bind在了一个叫todo的变量上-->
+			<todo-item v-for="item in todos" v-bind:todo="item"></todo-item>
+		</ol>
+	</div>
+
+	
+	<script>
+		Vue.component('todo-item',{
+			props:['todo'],
+			template:'<li>{{todo.text}}</li>'
+		})
+
+		var app7 = new Vue({
+			el: '#app-7',
+			data:{
+				todos:[{text:'fuck'},{text:'shit'},{text:'oh yeah'}]
+			}
+		})
+
+
+		// 属性与方法
+
+		
+	</script>
+
+
+	<div id="app-8">
+		<p>{{message|uptobig}}</p>
+	</div>
+	<script>
+
+	// vue.filter
+		// 先搞明白一些js方法=。=
+		// 
+		var str1 = "hello world";
+		console.log(str1.charAt(0));
+		
+		Vue.filter('uptobig',function(value){
+			if(value){
+				var val = value.toString();
+				return val.charAt(0).toUpperCase() + val.slice(1);
+			}else{
+				return '';
+			}
+		})
+
+		var vm = new Vue({
+			el: '#app-8',
+			data:{
+				message:'hello world'
+			}
+		})
+	</script>
+</body>
+</html>
