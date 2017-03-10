@@ -13,7 +13,7 @@
 		</ol>
 	</div>
 
-	
+
 	<script>
 		Vue.component('todo-item',{
 			props:['todo'],
@@ -30,7 +30,7 @@
 
 		// 属性与方法
 
-		
+
 	</script>
 
 
@@ -41,10 +41,10 @@
 
 	// vue.filter
 		// 先搞明白一些js方法=。=
-		// 
+		//
 		var str1 = "hello world";
 		console.log(str1.charAt(0));
-		
+
 		Vue.filter('uptobig',function(value){
 			if(value){
 				var val = value.toString();
@@ -109,6 +109,62 @@
 			// 	}
 			// }
 		})
+	</script>
+
+	<!-- 计算属性 vs watch -->
+	<div id="app-12">{{ fullname}}</div>
+	<script>
+		var app12 = new Vue({
+			el: '#app-12',
+			data:{
+				firstname: 'foo',
+				lastname: 'bar'
+				// fullname:'foo bar'
+			},
+			// watch:{
+			// 	firstname: function(val){
+			// 		this.fullname = val + ',' + this.lastname
+			// 	},
+			// 	lastname:function(val){
+			// 		this.fullname = this.firstname + ',' + val
+			// 	}
+			// },
+			computed:{
+				fullname: function(){
+					return this.firstname + ' ' +this.lastname;
+				}
+			}
+		})
+	</script>
+
+	<script>
+		var vm = new Vue({
+			data:{
+				a:1,
+				b:2,
+				c:3
+			},
+			watch:{
+				a:function(val, oldval){
+					console.log('new: %s, old: %s', val, oldval)
+				},
+				b:function(a, b){
+					console.log(a*b);
+					console.log(a);
+					console.log(b)
+				},
+				c: {
+      				handler: function (val, oldval) {
+      					console.log(val-oldval)
+      				},
+      				deep: false
+    			}
+			}
+		})
+
+		vm.a = 2;
+		vm.b = 10;
+		vm.c = 100;
 	</script>
 </body>
 </html>
