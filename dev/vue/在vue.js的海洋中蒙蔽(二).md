@@ -6,7 +6,7 @@
 
 ##### 简单例子:
 
-Html:
+html:
 
 ``````
 <div id='app-10'>
@@ -15,7 +15,7 @@ Html:
 </div>
 ``````
 
-Js:
+js:
 
 ``````
 var app10 = new Vue({
@@ -97,5 +97,22 @@ var app10 = new Vue({
   	}
 ``````
 
+然后在chrome中console命令
 
+``````
+>app10.changedmessage
+<1489498314075
+//再次调用
+>app10.changedmessage
+<1489498314075
+
+//调用method方法
+>app10.methodmessage()
+<1489498639685
+//再次调用
+>app10.methodmessage()
+<1489498676609
+``````
+
+所以**computed**是只执行一次然后存入缓存，多次调用也只会调用缓存的值，而**method**是每次都会执行，多次调用就多次执行，对于有很大的计算量的，应当用**computed**。
 
