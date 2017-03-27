@@ -200,6 +200,42 @@
 		//文档
 		加法函数，传入两个参数可实现两数相加
 	</script>
+
+	<!-- v-for后面是用'=' -->
+	<div id="app-14">
+		<ul>
+			<template v-for="item in items">
+				<li>{{item.text}}</li>
+				<li class="driver">test</li>
+			</template>
+		</ul>
+	</div>
+	<script>
+		var app14 = new Vue({
+			el: '#app-14',
+			data:{
+				items:[{text:'message1'},{text:'message2'}]
+			}
+		})
+	</script>
+
+	<div id="app-15">
+		<ul>
+			<li v-for="(value,key,index) in obj">{{index}}:{{key}}-{{value}}</li>
+		</ul>
+	</div>
+	<script>
+		var app15 = new Vue({
+			el: '#app-15',
+			data:{
+				obj:{
+					firstname: 'zhang',
+					lastname: 'zao',
+					age: 23
+				}
+			}
+		})
+	</script>
 </body>
 </html>
 
