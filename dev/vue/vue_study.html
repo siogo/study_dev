@@ -191,14 +191,6 @@
 				ok: false
 			}
 		})
-
-
-		function add(a,b){
-			return a+b;
-		}
-
-		//文档
-		加法函数，传入两个参数可实现两数相加
 	</script>
 
 	<!-- v-for后面是用'=' -->
@@ -233,6 +225,95 @@
 					lastname: 'zao',
 					age: 23
 				}
+			}
+		})
+	</script>
+
+	<div id="app-16">
+		<my-component></my-component>
+		<component2></component2>
+		<!-- <testcomponent></testcomponent> -->
+	</div>
+	<script>
+		// 全局绑定
+		Vue.component('my-component',{
+			template:'<div>A custom component!</div>'
+		})
+
+		// 局部绑定
+		var component2 = {
+			template:'<div>another component</div>'
+		}
+
+		new Vue({
+			el: '#app-16',
+			components:{
+				'component2': component2
+			}
+		})
+	</script>
+
+	<div id="app-17">
+		<test></test>
+		<test></test>
+		<test></test>
+	</div>
+	<script>
+		Vue.component('test',{
+			template:'<button v-on:click="counter += 1">{{ counter }}</button>',
+			data(){
+				return {
+					counter: 0
+				}
+			}
+		})
+
+		var app17 = new Vue({
+			el:'#app-17'
+		})
+	</script>
+
+	<div id="app-18">
+		<button id="btn">0</button>
+	</div>
+	<script>
+		var btn = document.getElementById('btn');
+		btn.onclick = function(){
+			var value = parseInt(btn.innerHTML);
+			value = value + 1;
+			btn.innerHTML = '';
+			btn.innerHTML = value;
+		}
+	</script>
+
+	<div id="app-19">
+		<p>{{message}}</p>
+		<child message='hello!'></child>
+	</div>
+	<script>
+		Vue.component('child',{
+			props:['message'],
+			template:'<span>{{message}}</span>'
+		})
+
+		var app19 = new Vue({
+			el:'#app-19',
+			data:{
+				message:'test hello'
+			}
+		})
+	</script>
+
+	<div id="app-20">
+
+		<input v-model="message">
+		<p>{{message}}</p>
+	</div>
+	<script>
+		var app20 = new Vue({
+			el: '#app-20',
+			data:{
+				message:''
 			}
 		})
 	</script>
