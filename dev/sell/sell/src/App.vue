@@ -44,6 +44,11 @@
 </script>
 
 <style>
+  body{
+    line-height: 1;
+    font-weight: 200;
+    font-family: 'PingFang SC','STHeitiSC-Light'
+  }
   .tab{
     display: flex;
     width: 100%;
