@@ -1,5 +1,5 @@
 <template>
-	<div class="header">
+	<div class="header topheader">
 		<div class="content-wrapper">
 			<div class="avatar">
 				<img width="64" height="64" :src="seller.avatar">
@@ -17,30 +17,56 @@
 					<span class="text">{{seller.supports[0].description}}</span>
 				</div>
 			</div>
-			<div v-if="seller.supports" class="support-count">
+			<div v-if="seller.supports" class="support-count" @click="showDetail">
 				<span class="count">{{seller.supports.length}}个</span>
 				<i class="icon-keyboard_arrow_right"></i>
 			</div>
 		</div>
-		<div class="bulletin-wrapper">
+		<div class="bulletin-wrapper" @click="showDetail">
 			<span class="bulletin-title"></span><span class="bulletin-text">{{seller.bulletin}}</span>
 			<i class="icon-keyboard_arrow_right"></i>
 		</div>
 		<div class="background">
 			<img :src="seller.avatar" width="100%" height="100%">
 		</div>
+		<div v-show="detailshow" class="detail">
+			<div class="detail-wrapper clearfix">
+				<div class="detail-main">
+					<h1 class="name">{{seller.name}}</h1>
+					<star :size="48" :score="seller.score"></star>
+				</div>
+			</div>
+			<div class="detail-close">
+				<i class="icon-close"></i>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script type="text/ecmascript-6">
+	import star from '../star/star.vue';
+
 	export default{
 		props:{
 			seller:{
 				type: Object
 			}
 		},
+		data(){
+			return {
+				detailshow: false
+			}
+		},
+		methods:{
+			showDetail(){
+				this.detailshow = true;
+			}
+		},
 		created(){
 			this.classMap = ['decrease','discount','special','invoice','guarantee']
+		},
+		components:{
+			star
 		}
 	}
 </script>
@@ -48,10 +74,22 @@
 
 <style>
 @import "../../common/css/font.css";
-.header{
+.clearfix{
+	display: inline-block;
+}
+.clearfix:after{
+	display: block;
+	content: ".";
+	height: 0;
+	line-height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.topheader{
 	color: #fff;
 	position: relative;
 	background: rgba(7,17,27,0.5);
+	overflow: hidden;
 }
 .header .content-wrapper{
 	padding: 24px 12px 18px 24px;
@@ -66,6 +104,38 @@
 	height: 100%;
 	z-index: -1;
 	filter: blur(10px);
+}
+.header .detail{
+	position: fixed;
+	z-index: 100;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background: rgba(7,17,27,0.8);
+	top: 0;
+	left: 0;
+}
+.detail-wrapper{
+	min-height: 100%;
+	width: 100%;
+}
+.detail-main{
+	margin-top: 64px;
+	padding-bottom: 64px;
+}
+.detail-main .name{
+	line-height: 16px;
+	text-align: center;
+	font-size: 16px;
+	font-weight: 700;
+}
+.detail-close{
+	position: relative;
+	width: 32px;
+	height: 32px;
+	margin: -64px auto 0 auto;
+	clear: both;
+	font-size: 32px;
 }
 .header .bulletin-wrapper{
 	height: 28px;
@@ -86,7 +156,7 @@
 .bulletin-title{
 	display: inline-block;
 	vertical-align: top;
-	margin-top: 7px;
+	margin-top: 8px;
 	width: 22px;
 	height: 12px;
 	background-size: 22px 12px;
