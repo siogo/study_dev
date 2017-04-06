@@ -1,6 +1,6 @@
 <template>
 	<div class="star" :class="starType">
-		<span v-for="itemClass in itemClasses" :class="itemClass" class="star-item"></span>
+		<span v-for="itemClass in itemClasses" :class="itemClass" class="star-item" track-by="$index"></span>
 	</div>
 </template>
 
@@ -48,7 +48,7 @@
 	font-size: 0;
 }
 .star-item{
-	display: block;
+	display: inline-block;
 	background-repeat: no-repeat;
 }
 .star-48{
@@ -63,14 +63,14 @@
 .star-48 .star-item:last-child{
 	margin-right: 0;
 }
-.star-48 .star-item .on{
-	background-image: url('./star48_on.png');
+.star-48 .on{
+	background-image: url('./star48_on@2x.png');
 }
-.star-48 .star-item .half{
-	background-image: url('./star48_half.png');
+.star-48 .half{
+	background-image: url('./star48_half@2x.png');
 }
-.star-48 .star-item .off{
-	background-image: url('./star48_off.png');
+.star-48 .off{
+	background-image: url('./star48_off@2x.png');
 }
 
 .star-36{
@@ -85,14 +85,14 @@
 .star-36 .star-item:last-child{
 	margin-right: 0;
 }
-.star-36 .star-item .on{
-	background-image: url('./star36_on.png');
+.star-36 .on{
+	background-image: url('./star36_on@2x.png');
 }
-.star-36 .star-item .half{
-	background-image: url('./star36_half.png');
+.star-36 .half{
+	background-image: url('./star36_half@2x.png');
 }
-.star-36 .star-item .off{
-	background-image: url('./star36_off.png');
+.star-36 .off{
+	background-image: url('./star36_off@2x.png');
 }
 
 .star-24{
@@ -107,14 +107,45 @@
 .star-24 .star-item:last-child{
 	margin-right: 0;
 }
-.star-24 .star-item .on{
-	background-image: url('./star24_on.png');
+.star-24 .on{
+	background-image: url('./star24_on@2x.png');
 }
-.star-24 .star-item .half{
-	background-image: url('./star24_half.png');
+.star-24 .half{
+	background-image: url('./star24_half@2x.png');
 }
-.star-24 .star-item .off{
-	background-image: url('./star24_off.png');
+.star-24 .off{
+	background-image: url('./star24_off@2x.png');
+}
+@media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3){
+.star-48 .on{
+	background-image: url('./star48_on@3x.png');
+}
+.star-48 .half{
+	background-image: url('./star48_half@3x.png');
+}
+.star-48 .off{
+	background-image: url('./star48_off@3x.png');
 }
 
+.star-36 .on{
+	background-image: url('./star36_on@3x.png');
+}
+.star-36 .half{
+	background-image: url('./star36_half@3x.png');
+}
+.star-36 .off{
+	background-image: url('./star36_off@3x.png');
+}
+
+.star-24 .on{
+	background-image: url('./star24_on@3x.png');
+}
+.star-24 .half{
+	background-image: url('./star24_half@3x.png');
+}
+.star-24 .off{
+	background-image: url('./star24_off@3x.png');
+}
+
+}
 </style>
