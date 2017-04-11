@@ -172,7 +172,7 @@
 		vm.c = 100;
 	</script>
 
-	<div id="app-13">
+	<!-- <div id="app-13">
 		<p v-if="ok">yes</p>
 		<p v-else>no</p>
 		<template v-if="loginType === 'username'">
@@ -191,7 +191,7 @@
 				ok: false
 			}
 		})
-	</script>
+	</script> -->
 
 	<!-- v-for后面是用'=' -->
 	<div id="app-14">
@@ -314,6 +314,30 @@
 			el: '#app-20',
 			data:{
 				message:''
+			}
+		})
+	</script>
+
+	<div id="app-21">
+		<my-article></my-article>
+	</div>
+	<script type="text/javascript"></script>
+		import myArticle from "./myArticle.vue";
+
+		var app21 = new Vue({
+			el: "#app-21",
+			components:{
+				myArticle
+			},
+			created(){
+				this.artList = [
+		            {name : 'ziksang4' , startTime : '4小时前' , content:'ddddddddd',good : 4}
+		        ]
+			},
+			data(){
+				return {
+					artList:[]
+				}
 			}
 		})
 	</script>
