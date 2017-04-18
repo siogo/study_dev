@@ -41,15 +41,23 @@
 						<div class="text">优惠信息</div>
 						<div class="line"></div>
 					</div>
-					<!-- <ul v-if="seller.supports" class="supports">
-						<li class="supports-item" v-for="item in seller.supports">
-							<span class="icon" :class="classMap[seller.supports[$index].type]"></span>
-							<span class="text">{{seller.supports[$index].description}}</span>
+					<ul v-if="seller.supports" class="supports">
+						<li class="support-item" v-for="(item,index) in seller.supports">
+							<span class="icon" :class="classMap[seller.supports[index].type]"></span>
+							<span class="text">{{seller.supports[index].description}}</span>
 						</li>
-					</ul> -->
+					</ul>
+					<div class="title">
+						<div class="line"></div>
+						<div class="text">商家公告</div>
+						<div class="line"></div>
+					</div>
+					<div class="bulletin">
+						<p class="content">{{seller.bulletin}}</p>
+					</div>
 				</div>
 			</div>
-			<div class="detail-close">
+			<div class="detail-close" @click="hideDetail">
 				<i class="icon-close"></i>
 			</div>
 		</div>
@@ -73,6 +81,9 @@
 		methods:{
 			showDetail(){
 				this.detailshow = true;
+			},
+			hideDetail(){
+				this.detailshow = false;
 			}
 		},
 		created(){
@@ -124,10 +135,12 @@
 	width: 100%;
 	height: 100%;
 	overflow: auto;
-	background: rgba(7,17,27,0.8);
 	top: 0;
 	left: 0;
+	background: rgba(7,17,27,0.8);
+	backdrop-filter: blur(10px);
 }
+
 .detail-wrapper{
 	min-height: 100%;
 	width: 100%;
@@ -146,6 +159,56 @@
 	margin-top: 18px;
 	padding: 2px 0;
 	text-align: center;
+}
+.detail-wrapper .detail-main .title{
+	width: 80%;
+	margin: 28px auto 24px auto;
+	display: flex;
+}
+.detail-wrapper .detail-main .title .line{
+	flex: 1;
+	position: relative;
+	top: -6px;
+	border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+.detail-wrapper .detail-main .title .text{
+	padding: 0 12px;
+	font-size: 14px;
+	font-weight: 700;
+}
+.detail .detail-wrapper .detail-main .bulletin{
+	width: 80%;
+	margin: 0 auto;
+}
+.detail .detail-wrapper .detail-main .bulletin .content{
+	padding: 0 12px;
+	line-height: 24px;
+	font-size: 12px;
+}
+.detail .detail-wrapper .detail-main .supports{
+	width: 80%;
+	margin: 0 auto;
+}
+.detail .detail-wrapper .detail-main .supports .support-item{
+	padding: 0 12px;
+	margin-bottom: 12px;
+	font-size: 0;
+}
+.detail .detail-wrapper .detail-main .supports .support-item:last-child{
+	margin-bottom: 0;
+}
+.detail .detail-wrapper .detail-main .supports .support-item .icon{
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	vertical-align: top;
+	margin-right: 6px;
+	background-size: 16px 16px;
+	background-repeat: no-repeat;
+}
+.detail .detail-wrapper .detail-main .supports .support-item .text{
+	line-height: 16px;
+	font-size: 12px;
 }
 .detail-close{
 	position: relative;
@@ -253,50 +316,80 @@
 	.header .content-wrapper .content .support .decrease{
 		background-image: url('./decrease_1@2x.png');
 	}
+	.detail .detail-wrapper .detail-main .supports .support-item .decrease{
+		background-image: url('./decrease_2@2x.png');
+	}
 }
 @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3){
 	.header .content-wrapper .content .support .decrease{
 		background-image: url('./decrease_1@3x.png');
+	}
+	.detail-main .supports .support-item .decrease{
+		background-image: url('./decrease_2@3x.png');
 	}
 }
 @media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2){
 	.header .content-wrapper .content .support .discount{
 		background-image: url('./discount_1@2x.png');
 	}
+	.detail-main .supports .support-item .discount{
+		background-image: url('./discount_2@2x.png');
+	}
 }
 @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3){
 	.header .content-wrapper .content .support .discount{
 		background-image: url('./discount_1@3x.png');
+	}
+	.detail-main .supports .support-item .discount{
+		background-image: url('./discount_2@3x.png');
 	}
 }
 @media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2){
 	.header .content-wrapper .content .support .guarantee{
 		background-image: url('./guarantee_1@2x.png');
 	}
+	.detail-main .supports .support-item .guarantee{
+		background-image: url('./guarantee_2@2x.png');
+	}
 }
 @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3){
 	.header .content-wrapper .content .support .guarantee{
 		background-image: url('./guarantee_1@3x.png');
+	}
+	.detail-main .supports .support-item .guarantee{
+		background-image: url('./guarantee_2@3x.png');
 	}
 }
 @media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2){
 	.header .content-wrapper .content .support .invoice{
 		background-image: url('./invoice_1@2x.png');
 	}
+	.detail-main .supports .support-item .invoice{
+		background-image: url('./invoice_2@2x.png');
+	}
 }
 @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3){
 	.header .content-wrapper .content .support .invoice{
 		background-image: url('./invoice_1@3x.png');
+	}
+	.detail-main .supports .support-item .invoice{
+		background-image: url('./invoice_2@3x.png');
 	}
 }
 @media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2){
 	.header .content-wrapper .content .support .special{
 		background-image: url('./special_1@2x.png');
 	}
+	.detail-main .supports .support-item .special{
+		background-image: url('./special_2@2x.png');
+	}
 }
 @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3){
 	.header .content-wrapper .content .support .special{
 		background-image: url('./special_1@3x.png');
+	}
+	.detail-main .supports .support-item .special{
+		background-image: url('./special_2@3x.png');
 	}
 }
 .header .content-wrapper .content .title .brand{
