@@ -73,7 +73,11 @@
     		_initSrcoll(){
     			console.log(this.$refs.menuWrapper);
     			this.menuSrcoll = new BScroll(this.$refs.menuWrapper,{});
-    			this.foodSrcoll = new BScroll(this.$refs.foodsWrapper,{});
+    			this.foodSrcoll = new BScroll(this.$refs.foodsWrapper,{
+    				probeType: 3
+    			});
+
+    			this.foodSrcoll
     		},
     		_calculateHeight(){
     			let height = 0;
