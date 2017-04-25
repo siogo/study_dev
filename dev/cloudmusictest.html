@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<input type="text" name="name">
+<button class="search">search</button>
+<audio class="audio" src="" controls="controls"></audio>
+
+<script src="./js/jquery.js"></script>
+<script>
+	$('.search').click(function(){
+		var val = $("input[name='name']").val();
+		var url = "https://api.imjad.cn/cloudmusic/?type=search&s="+"'"+val+"'";
+		$.get(url, {}, function(data){
+			console.log(data);
+			if(data.code == 200){
+				console.log(data.result.songs[0].id);
+				var id = data.result.songs[0].id;
+				$.get("https://api.imjad.cn/cloudmusic/", {type:'song',id:id}, function(data){
+					console.log(data.data[0].url);
+					var url = data.data[0].url;
+					$('.audio').attr({src:url});
+				})
+			}
+		})
+	})
+	// $.get("https://api.imjad.cn/cloudmusic/", {type:'song',id:'65126'}, function(data){
+	// 	console.log(data);
+	// })
+</script>
+</body>
+</html>
+<!-- https://api.imjad.cn/cloudmusic/?type=search&s=红玫瑰 -->
