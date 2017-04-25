@@ -13,7 +13,7 @@
       </div>
     </div>
     <hr class="hr">
-    <router-view></router-view>
+    <router-view :seller="seller"></router-view>
   </div>
 </template>
 

@@ -2,7 +2,7 @@
 	<div class="goods">
 		<div class="menu-wrapper" ref="menuWrapper">
 			<ul>
-				<li v-for="item in goods" class="menu-item">
+				<li v-for="(item,index) in goods" class="menu-item" :class="{'current':currentIndex=== index}" @click="selectMenu(index,$event)">
 					<span class="text">
 						<span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span>{{item.name}}
 					</span>
@@ -33,12 +33,14 @@
 				</li>
 			</ul>
 		</div>
+		<shopcart :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart>
 	</div>
 
 </template>
 
 <script type="text/ecmascript-6">
 	import BScroll from "better-scroll";
+	import shopcart from "../shopcart/shopcart.vue";
 
 	const ERR_OK = 0;
 
@@ -53,6 +55,18 @@
 				goods:[],
 				listHeight: [],
 				scrollY: 0
+			}
+		},
+		computed:{
+			currentIndex(){
+				for(let i = 0;i<this.listHeight.length;i++){
+					let height1 = this.listHeight[i];
+					let height2 = this.listHeight[i+1];
+					if(!height2 || (this.scrollY >= height1 && this.scrollY < height2)){
+						return i;
+					}
+				}
+				return 0;
 			}
 		},
 		created(){
@@ -71,15 +85,20 @@
     	},
     	methods:{
     		_initSrcoll(){
-    			console.log(this.$refs.menuWrapper);
-    			this.menuSrcoll = new BScroll(this.$refs.menuWrapper,{});
-    			this.foodSrcoll = new BScroll(this.$refs.foodsWrapper,{
-    				probeType: 3
+    			this.menuSrcoll = new BScroll(this.$refs.menuWrapper,{
+    				click:true
     			});
-
-    			this.foodSrcoll
+    			this.foodSrcoll = new BScroll(this.$refs.foodsWrapper,{
+    				probeType: 3,
+    				click: true
+    			});
+    			// 实时监听scroll的位置并记录scrollY
+    			this.foodSrcoll.on('scroll',(pos)=>{
+    				this.scrollY = Math.abs(Math.round(pos.y));
+    			})
     		},
     		_calculateHeight(){
+    			// 将每个food-list的高度push进listHeight
     			let height = 0;
     			this.listHeight.push(height);
     			let foodlist = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook');
@@ -87,7 +106,18 @@
     				height = height + foodlist[i].clientHeight;
     				this.listHeight.push(height);
     			}
+    		},
+    		selectMenu(index, event){
+    			if(!event._constructed){
+    				return;
+    			}
+    			let foodlist = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook');
+    			let el = foodlist[index];
+    			this.foodSrcoll.scrollToElement(el,300);
     		}
+    	},
+    	components:{
+    		shopcart
     	}
 	}
 </script>
@@ -160,6 +190,16 @@
 				width: 56px;
 				vertical-align: middle;
 				border-bottom: 1px rgba(7, 17, 27, 0.1) solid;
+			}
+		}
+		.current{
+			position: relative;
+			margin-top: 1px;
+			z-index: 10;
+			background-color: #fff;
+			font-weight: 700;
+			.text{
+				border: none;
 			}
 		}
 		.menu-item:last-child{
