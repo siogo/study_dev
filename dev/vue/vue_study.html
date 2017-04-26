@@ -321,23 +321,52 @@
 	<div id="app-21">
 		<my-article></my-article>
 	</div>
-	<script type="text/javascript"></script>
-		import myArticle from "./myArticle.vue";
+	<script type="text/javascript">
 
-		var app21 = new Vue({
-			el: "#app-21",
-			components:{
-				myArticle
+		// var app21 = new Vue({
+		// 	el: "#app-21",
+		// 	components:{
+		// 		myArticle
+		// 	},
+		// 	created(){
+		// 		this.artList = [
+		//             {name : 'ziksang4' , startTime : '4小时前' , content:'ddddddddd',good : 4}
+		//         ]
+		// 	},
+		// 	data(){
+		// 		return {
+		// 			artList:[]
+		// 		}
+		// 	}
+		// })
+	</script>
+
+	<div id="app-22">
+		<p>{{message}}</p>
+		<p>{{another}}</p>
+	</div>
+	<script>
+		var app22 = new Vue({
+			el: "#app-22",
+			data:{
+				message:"hello",
+				another:"world"
 			},
-			created(){
-				this.artList = [
-		            {name : 'ziksang4' , startTime : '4小时前' , content:'ddddddddd',good : 4}
-		        ]
+			beforeUpdate(){
+				this.$nextTick(()=>{
+					this.another = "hahaha,beforeUpdate"
+				})
 			},
-			data(){
-				return {
-					artList:[]
-				}
+			beforeDestroy(){
+				console.log('before');
+				this.$nextTick(()=>{
+					this.another = "hahaha,beforeDestroy"
+				})
+			},
+			destroyed(){
+				this.$nextTick(()=>{
+					this.another = "hahaha,destroyed"
+				})
 			}
 		})
 	</script>
