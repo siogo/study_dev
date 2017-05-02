@@ -27,13 +27,17 @@
 								<div class="price">
 									<span class="now">￥{{food.price}}</span><span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
 								</div>
+								<div class="cartcontrol-wrapper">
+									<cartcontrol :food='food'></cartcontrol>
+								</div>
 							</div>
+
 						</li>
 					</ul>
 				</li>
 			</ul>
 		</div>
-		<shopcart :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart>
+		<shopcart :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart>
 	</div>
 
 </template>
@@ -41,6 +45,7 @@
 <script type="text/ecmascript-6">
 	import BScroll from "better-scroll";
 	import shopcart from "../shopcart/shopcart.vue";
+	import cartcontrol from "../cartcontrol/cartcontrol.vue";
 
 	const ERR_OK = 0;
 
@@ -67,6 +72,20 @@
 					}
 				}
 				return 0;
+			},
+			selectFoods(){
+				let foods = [];
+				console.log(this.goods);
+				// 第一层拿到每个分类
+				this.goods.forEach((good)=>{
+					// 第二层拿到每个food
+					good.foods.forEach((food)=>{
+						if(food.count){
+							foods.push(food);
+						}
+					})
+				})
+				return foods;
 			}
 		},
 		created(){
@@ -117,7 +136,8 @@
     		}
     	},
     	components:{
-    		shopcart
+    		shopcart,
+    		cartcontrol
     	}
 	}
 </script>
@@ -221,6 +241,7 @@
 		}
 		.food-item{
 			display: flex;
+			position: relative;
 			margin: 18px;
 			padding-bottom: 18px;
 			border-bottom: 1px rgba(7, 17, 27, 0.1) solid;
@@ -272,6 +293,11 @@
 					font-size: 10px;
 					color: rgb(147,153,159);
 				}
+			}
+			.cartcontrol-wrapper{
+				position: absolute;
+				right: 0;
+				bottom: 12px;
 			}
 		}
 	}
