@@ -20,7 +20,6 @@
 </template>
 
 <script>
-	// require('../../common/css/font.css');
 	export default{
 		props:{
 			selectFoods:{
