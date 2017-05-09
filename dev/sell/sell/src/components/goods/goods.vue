@@ -75,7 +75,6 @@
 			},
 			selectFoods(){
 				let foods = [];
-				console.log(this.goods);
 				// 第一层拿到每个分类
 				this.goods.forEach((good)=>{
 					// 第二层拿到每个food
