@@ -21,7 +21,13 @@ export default {
 	z-index: 9999;
 	background: #fff;
 	.TalionNav-primary{
-
+		display: flex;
+		padding: 0 18px;
+		background: #fff;
+		border-bottom: 1px solid #f3f3f3;
+		height: 47px;
+		box-sizing: border-box;
+		justify-content: space-between;
 	}
 }
 </style>
