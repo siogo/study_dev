@@ -29,3 +29,8 @@
     })
     app.use('/api',apiRouters)
 ```
+#### 6.安装插件
+安装vue-resource、less-loader
+```npm install vue-resource --save-dev
+   npm install --save-dev less-loader less 
+```

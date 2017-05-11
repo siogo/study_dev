@@ -22,17 +22,20 @@ var proxyTable = config.dev.proxyTable
 
 var app = express()
 
-var appData = require('../data.json')
+var appData = require('../data.json');
+var movie = appData;
+
 var apiRouters = express.Router();
 
 apiRouters.get('/movie',function(req,res){
   res.json({
     errno: 0,
-    data: appData
+    data: movie
   })
 })
 
-app.use('/api',apiRouters)
+app.use('/api',apiRouters);
+
 
 var compiler = webpack(webpackConfig)
 
