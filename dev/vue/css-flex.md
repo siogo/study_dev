@@ -41,4 +41,18 @@ flex-flow是flex-direction和flex-wrap的简写形式，默认参数为：
     flex-flow: row nowrap;
 ```
 
+#### justify-content
+定义主轴对齐的的方式
+```
+    justify-content: flex-star || flex-end || center || space-between || space-around
+```
+
+- flex-star: 主轴方向依次排列，对齐主轴顶端，元素仍然按着先后顺序排列，下同
+- flex-end: 主轴方向依次排列，对齐主轴底端
+- center: 主轴方向依次排列，对齐主轴中部
+- space-between: 撑开容器空间，上下项目对齐容器顶部和底部
+- space-around:撑开容器空间，项目间距相同
+
+!(justify-content)[http://optmvphrh.bkt.clouddn.com/justify-content.png]
+
 ### 项目的属性
