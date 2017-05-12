@@ -12,7 +12,7 @@
     flex-flow 
     justify-content
     align-content
-    align-item
+    align-items
 ```
 #### flex-direction
 定义flex容器主轴的方向，此属性有四个参数
@@ -50,9 +50,21 @@ flex-flow是flex-direction和flex-wrap的简写形式，默认参数为：
 - flex-star: 主轴方向依次排列，对齐主轴顶端，元素仍然按着先后顺序排列，下同
 - flex-end: 主轴方向依次排列，对齐主轴底端
 - center: 主轴方向依次排列，对齐主轴中部
-- space-between: 撑开容器空间，上下项目对齐容器顶部和底部
+- space-between: 撑开容器空间，上下项目对齐容器顶部和底部，每个项目间距相同
 - space-around:撑开容器空间，项目间距相同
 
 !(justify-content)[http://optmvphrh.bkt.clouddn.com/justify-content.png]
+
+#### align-items
+定义交叉轴上的对齐方式
+```
+    align-items: flex-star || flex-end || center || stretch || baseline
+```
+
+- flex-star: 交叉轴方向依次排列，对齐交叉轴顶部
+- flex-end: 交叉轴方向依次排列，对齐交叉轴底部
+- center: 交叉轴方向依次排列，在交叉轴中部
+- stretch: 撑满整个容器（项目没有宽高才适用）
+- baseline: 项目中文字对齐，首行底部对齐
 
 ### 项目的属性
