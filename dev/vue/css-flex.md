@@ -53,7 +53,7 @@ flex-flow是flex-direction和flex-wrap的简写形式，默认参数为：
 - space-between: 撑开容器空间，上下项目对齐容器顶部和底部，每个项目间距相同
 - space-around:撑开容器空间，项目间距相同
 
-!(justify-content)[http://optmvphrh.bkt.clouddn.com/justify-content.png]
+<img width="637" height="763" src="http://optmvphrh.bkt.clouddn.com/justify-content.png">
 
 #### align-items
 定义交叉轴上的对齐方式
