@@ -1,6 +1,6 @@
 <template>
 <transition name="fade">
-	<div v-show="showFlag" class="food">
+	<div v-show="showFlag" class="food" ref="food">
 		<div class="food-content">
 			<div class="image-header">
 				<img :src="food.image">
@@ -18,13 +18,19 @@
 					<span class="now">￥{{food.price}}</span><span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
 				</div>
 			</div>
+			<div class="cartcontrol-wrapper">
+				<cartcontrol :food="food"></cartcontrol>
+			</div>
+			<div @click.stop.prevent="addFirst" class="buy" v-show="!food.count || food.count == 0">加入购物车</div>
 		</div>
 	</div>
 </transition>
 </template>
 
 <script>
-
+import BScroll from "better-scroll";
+import cartcontrol from "../cartcontrol/cartcontrol.vue";
+import Vue from 'vue';
 
 export default {
 	props:{
@@ -40,10 +46,29 @@ export default {
 	methods:{
 		show(){
 			this.showFlag = true;
+			this.$nextTick(()=>{
+				if(!this.scroll){
+					this.scroll = new BScroll(this.$refs.food,{
+						click:true
+					})
+				}else{
+					this.scroll.refresh();
+				}
+			})
 		},
 		hide(){
 			this.showFlag = false;
+		},
+		addFirst(e){
+			if(!e._constructed){
+				return ;
+			}else{
+				Vue.set(this.food,"count",1);
+			}
 		}
+	},
+	components:{
+		cartcontrol
 	}
 }
 </script>
@@ -126,6 +151,25 @@ export default {
 					color: rgb(147,153,159);
 				}
 			}
+		}
+		.cartcontrol-wrapper{
+			position: absolute;
+			right: 12px;
+			bottom: 12px;
+		}
+		.buy{
+			position: absolute;
+			right: 18px;
+			bottom: 18px;
+			z-index: 10;
+			line-height: 24px;
+			height: 24px;
+			padding: 0 12px;
+			box-sizing: border-box;
+			font-size: 10px;
+			border-radius: 12px;
+			color: #fff;
+			background: blue;
 		}
 	}
 }

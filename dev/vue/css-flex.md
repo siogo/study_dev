@@ -67,4 +67,19 @@ flex-flow是flex-direction和flex-wrap的简写形式，默认参数为：
 - stretch: 撑满整个容器（项目没有宽高才适用）
 - baseline: 项目中文字对齐，首行底部对齐
 
+#### align-content
+多根轴线的对齐方式
+```
+    align-content: flex-star || flex-end || stretch || center || space-between || space-around
+```
+
 ### 项目的属性
+项目也有6个属性：
+```
+    order
+    flex-grow
+    flex-shrink
+    flex-basis
+    
+```
+
