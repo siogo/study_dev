@@ -17,11 +17,21 @@
 				<div class="price">
 					<span class="now">￥{{food.price}}</span><span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
 				</div>
+				<div class="cartcontrol-wrapper">
+					<cartcontrol :food="food"></cartcontrol>
+				</div>
+				<div @click.stop.prevent="addFirst" class="buy" v-show="!food.count || food.count == 0">加入购物车</div>
 			</div>
-			<div class="cartcontrol-wrapper">
-				<cartcontrol :food="food"></cartcontrol>
+			<split v-show="food.info"></split>
+			<div class="info" v-show="food.info">
+				<h1 class="title">商品信息</h1>
+				<p class="text">{{food.info}}</p>
 			</div>
-			<div @click.stop.prevent="addFirst" class="buy" v-show="!food.count || food.count == 0">加入购物车</div>
+			<split></split>
+			<div class="rating">
+				<h1 class="title">商品评价</h1>
+				<ratingselect :ratings="food.ratings" :onlyContent="onlyContent" :desc="desc" :selectType="selectType"></ratingselect>
+			</div>
 		</div>
 	</div>
 </transition>
@@ -30,8 +40,14 @@
 <script>
 import BScroll from "better-scroll";
 import cartcontrol from "../cartcontrol/cartcontrol.vue";
+import split from "../split/split.vue";
+import ratingselect from "../ratingselect/ratingselect.vue";
 import Vue from 'vue';
 
+
+const POSITIVE = 0;
+const NEGATIVE = 1;
+const ALL = 2;
 export default {
 	props:{
 		food:{
@@ -40,12 +56,21 @@ export default {
 	},
 	data(){
 		return{
-			showFlag: false
+			showFlag: false,
+			selectType: ALL,
+			onlyContent:true,
+			desc:{
+				all:'全部',
+				positive:'推荐',
+				negative:'吐槽'
+			}
 		}
 	},
 	methods:{
 		show(){
 			this.showFlag = true;
+			this.selectType = ALL;
+			this.onlyContent = true;
 			this.$nextTick(()=>{
 				if(!this.scroll){
 					this.scroll = new BScroll(this.$refs.food,{
@@ -68,7 +93,9 @@ export default {
 		}
 	},
 	components:{
-		cartcontrol
+		cartcontrol,
+		split,
+		ratingselect
 	}
 }
 </script>
@@ -117,6 +144,7 @@ export default {
 		}
 		.content{
 			padding: 18px;
+			position: relative;
 			.title{
 				font-weight: 700;
 				line-height: 14px;
@@ -151,25 +179,49 @@ export default {
 					color: rgb(147,153,159);
 				}
 			}
+			.cartcontrol-wrapper{
+				position: absolute;
+				right: 12px;
+				bottom: 12px;
+			}
+			.buy{
+				position: absolute;
+				right: 18px;
+				bottom: 18px;
+				z-index: 10;
+				line-height: 24px;
+				height: 24px;
+				padding: 0 12px;
+				box-sizing: border-box;
+				font-size: 10px;
+				border-radius: 12px;
+				color: #fff;
+				background: rgb(0,160,220);
+			}
 		}
-		.cartcontrol-wrapper{
-			position: absolute;
-			right: 12px;
-			bottom: 12px;
+		.info{
+			padding: 18px;
+			.title{
+				line-height: 17px;
+				margin-bottom: 6px;
+				font-size: 14px;
+				color: rgb(7,17,27);
+			}
+			.text{
+				line-height: 24px;
+				padding: 0 8px;
+				font-size: 12px;
+				color: rgb(77,85,93);
+			}
 		}
-		.buy{
-			position: absolute;
-			right: 18px;
-			bottom: 18px;
-			z-index: 10;
-			line-height: 24px;
-			height: 24px;
-			padding: 0 12px;
-			box-sizing: border-box;
-			font-size: 10px;
-			border-radius: 12px;
-			color: #fff;
-			background: blue;
+		.rating{
+			padding-top: 18px;
+			.title{
+				line-height: 17px;
+				margin-left: 18px;
+				font-size: 14px;
+				color: rgb(7,17,27);
+			}
 		}
 	}
 }
