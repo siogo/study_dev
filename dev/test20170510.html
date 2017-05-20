@@ -5,12 +5,25 @@
 	<title></title>
 </head>
 <body>
-
+<select class="select">
+	<option value="111">111</option>
+	<option>222</option>
+	<option>333</option>
+</select>
+<button type="button" class="button2">close</button>
+<button type="button" class="button">Click Me!</button>
 
 <script src="./js/jquery.js"></script>
 <script src="./js/data.js"></script>
 <script>
-console.log(movie);
+$('.button').click(function(){
+	$('.select').find('option');
+	console.log($($('.select').find('option[value="111"]')).attr("selected",true));
+})
+
+$('.button2').click(function(){
+	console.log($($('.select').find('option[value="111"]')).attr("selected",false));
+})
 </script>
 </body>
 </html>
