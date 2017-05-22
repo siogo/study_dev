@@ -16,9 +16,13 @@
 <script src="./js/jquery.js"></script>
 <script src="./js/data.js"></script>
 <script>
-$('.button').click(function(){
-	$('.select').find('option');
-	console.log($($('.select').find('option[value="111"]')).attr("selected",true));
+var promise = new Promise(function(resolve,reject){});
+console.log(promise);
+
+
+$('.button').click(function(event){
+	console.log(event);
+	console.log(event.constructed);
 })
 
 $('.button2').click(function(){
