@@ -216,7 +216,7 @@ export default {
 				line-height: 24px;
 				.now{
 					color: rgb(240,20,20);
-					margin-rigth: 18px;
+					margin-right: 18px;
 					font-size: 14px;
 				}
 				.old{
