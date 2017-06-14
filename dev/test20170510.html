@@ -20,6 +20,18 @@ var promise = new Promise(function(resolve,reject){});
 console.log(promise);
 
 
+var reg = new RegExp();
+console.log(reg.$1);
+
+var a = 0.1;
+var b = 0.2;
+if((a+b) == 0.3){
+	console.log(true)
+}else{
+	console.log(false)
+}
+
+
 $('.button').click(function(event){
 	console.log(event);
 	console.log(event.constructed);

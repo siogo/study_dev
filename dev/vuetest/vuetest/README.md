@@ -1,6 +1,6 @@
 # vuetest
 
-> study vue
+> lianxi
 
 ## Build Setup
 
