@@ -16,30 +16,19 @@
 <script src="./js/jquery.js"></script>
 <script src="./js/data.js"></script>
 <script>
-var promise = new Promise(function(resolve,reject){});
-console.log(promise);
-
-
-var reg = new RegExp();
-console.log(reg.$1);
-
-var a = 0.1;
-var b = 0.2;
-if((a+b) == 0.3){
-	console.log(true)
-}else{
-	console.log(false)
+for (let i = 0; i < 366; i++) {
+	var b;
+	if(i == 0){
+		b=30000;
+	}else{
+		b = b+b*0.000108;
+	}
+	console.log("第"+i+"天：本金利息总和:  "+b);
 }
 
-
-$('.button').click(function(event){
-	console.log(event);
-	console.log(event.constructed);
-})
-
-$('.button2').click(function(){
-	console.log($($('.select').find('option[value="111"]')).attr("selected",false));
-})
 </script>
 </body>
 </html>
+1 1040205.064
+2 1082026
+3

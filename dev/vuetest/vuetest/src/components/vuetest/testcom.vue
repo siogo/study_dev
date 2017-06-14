@@ -2,6 +2,9 @@
     <div>
         <p>hello child</p>
         <p @click="show(fatherMessage)">{{fatherMessage}}</p>
+        <slot>
+            只有在没有要分发的内容时才会显示。
+        </slot>
     </div>
 </template>
 
