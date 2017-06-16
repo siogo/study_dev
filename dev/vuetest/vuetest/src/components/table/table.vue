@@ -18,10 +18,9 @@
 <script>
 export default {
     data(){
-        // return{
-        //     inputself:{},
-        //     inputsuperior:{}
-        // }
+        return{
+            
+        }
     },
     props:{
         table:{}    
