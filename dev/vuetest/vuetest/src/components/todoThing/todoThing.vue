@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="todo">
     <h3 class="todolistsTitle">待办事项</h3>
     <ul class="todolistsContent">
         <li v-for="(todo,$index) in lists" class="todolist" @click="showMS($index,todo)">
@@ -36,6 +36,9 @@ export default {
 </script>
 
 <style scope>
+.todo{
+    padding: 0 20px;
+}
 .todolistsTitle{
     color: #a57b7c;
 }

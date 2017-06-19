@@ -93,6 +93,7 @@ export default {
             }
         },
         total(){
+            this.headScore = [];
             for(let i = 0;i<this.lists.length;i++){
                 this.headScore.push(this.lists[i].picked)
             }

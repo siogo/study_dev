@@ -55,6 +55,7 @@ export default {
     },
     methods:{
         totle(){
+            this.selfScore = [];
             for(let i = 0;i<this.lists.length;i++){
                 this.selfScore.push(this.lists[i].picked)
             }

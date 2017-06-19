@@ -97,6 +97,7 @@ export default {
             }
         },
         total(){
+            this.totalScore = [];
             for(let i = 0;i<this.lists.length;i++){
                 this.totalScore.push(this.lists[i].picked)
             }
@@ -109,8 +110,7 @@ export default {
 <style scope>
 table{
     border-collapse:collapse;
-    width: 100%;
-    
+    width: 100%; 
 }
 td,th{
     height: 40px;

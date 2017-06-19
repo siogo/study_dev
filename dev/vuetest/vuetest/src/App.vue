@@ -18,6 +18,12 @@
         <headSubject></headSubject>
         <h2>-----委员会答题页-----</h2>
         <committeeSubject></committeeSubject>
+        <h2>-----部门员工-----</h2>
+        <departmentStaff></departmentStaff>
+        <h2>-----委员会员工-----</h2>
+        <committeeStaff></committeeStaff>
+        <h2>-----考评关系-----</h2>
+        <relationship></relationship>
     </div>
 </template>
 
@@ -29,6 +35,9 @@ import evaluation from './components/evaluation/evaluation.vue'
 import subject from './components/subject/subject.vue';
 import headSubject from './components/headSubject/headSubject.vue'
 import committeeSubject from './components/committeeSubject/committeeSubject.vue'
+import departmentStaff from './components/departmentStaff/departmentStaff.vue'
+import committeeStaff from './components/committeeStaff/committeeStaff.vue'
+import relationship from './components/relationship/relationship.vue'
 export default {
     data(){
         return {
@@ -42,7 +51,10 @@ export default {
         'evaluationList':evaluationList,
         'headSubject':headSubject,
         'committeeSubject':committeeSubject,
-        'evaluation':evaluation
+        'evaluation':evaluation,
+        'departmentStaff':departmentStaff,
+        'committeeStaff':committeeStaff,
+        'relationship':relationship
     },
     methods:{
         // fathershow(str){
