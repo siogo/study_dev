@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="container">
     <div class="search">
         <input type="input" v-model="searchMsg"><button @click="search">搜索</button>
     </div>
@@ -10,12 +10,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="staff in list.staffs">
+            <tr v-for="staff in list.staffs" v-show="needShow(staff.dep)">
                 <td v-for="(option,$index) in staff">  
                     <span v-if="$index == 'operate'" :class="changeClass(option)">
                         {{showMsg(option)}}
                     </span>
-                    <span v-else :class="changeClass($index)">{{option}}</span>
+                    <span v-else :class="changeClass($index)" @click="showrouter">{{option}}</span>
                 </td>
             </tr>
         </tbody>
@@ -34,7 +34,10 @@ export default {
                 staffs:[
                     {name:'李磊',dep:'研发部',job:'web前端开发',operate:0,reportOp:'工作报告'},
                     {name:'张想',dep:'研发部',job:'web前端开发',operate:1,reportOp:'工作报告'},
-                    {name:'王麻子',dep:'研发部',job:'web后端开发',operate:2,reportOp:'工作报告'}
+                    {name:'王麻子',dep:'研发部',job:'web后端开发',operate:2,reportOp:'工作报告'},
+                    {name:'李四',dep:'创意部',job:'web后端开发',operate:2,reportOp:'工作报告'},
+                    {name:'王五',dep:'客服部',job:'web后端开发',operate:2,reportOp:'工作报告'},
+                    {name:'张三',dep:'客服部',job:'web后端开发',operate:2,reportOp:'工作报告'}
                 ]
             }
         }
@@ -61,12 +64,31 @@ export default {
         search(){
             let str = this.searchMsg;
             alert(str);
+        },
+        needShow(val){
+            if(val == '客服部'){
+                return true;
+            }else{
+                return false;
+            }
+        },
+        showrouter(){
+            console.log(this.$route);
         }
+    },
+    mounted(){ 
+        console.log(this.$route);
+    },
+    created(){
+        console.log(this.$route);
     }
 }
 </script>
 
 <style>
+.container{
+    padding: 20px;
+}
 .search{
     display: inline-block;
     float: right;
