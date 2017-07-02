@@ -1,5 +1,5 @@
 <template>
-<div>
+<!--<div>
     <h3>李磊</h3>
     <h4>一、专业知识技能（分值50分）</h4>
     <div v-for="list in lists">
@@ -9,7 +9,7 @@
                 <tr v-for="title in list.tableTitle">
                     <th v-for="option in title">
                         <span>{{option}}</span>
-                    </th> 
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -21,14 +21,72 @@
                 </tr>
             </tbody>
         </table>
+        <p v-show="list.showErr">此为必填项</p>
     </div>
+
     <h4>员工自我评价</h4>
     <p class="selfEvaluation">{{selfEvaluation}}</p>
     <h4>部门负责人评语</h4>
-    <textarea v-model="headEvaluation"></textarea>
-    <button>取消</button>
-    <button @click="total()">提交</button>
-    <p>{{headScore}}</p>
+
+
+    <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容">
+    </el-input>
+
+
+
+    <div style="display: flex;justify-content: center">
+        <el-button type="info" @click="total()">提交</el-button>
+    </div>
+
+</div>-->
+<div>
+
+
+<div>
+    <h1>{{exam.title}}</h1>
+    <div v-for="list in exam.shijuan">
+        <h2>{{list.examinfo.reporttitle}}</h2>
+        <div v-for="timu in list.examinfo.questioninfo">
+            <h3>{{timu.questionname}}</h3>
+            <ul>
+                <li v-for="option in timu.qilist">
+                    <el-radio class="radio" v-model="timu.check" :label="option.id"></el-radio>
+                    {{option.questionitemname}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<h1>表格类型</h1>
+<div>
+    <h1>{{exam.title}}</h1>
+    <div v-for="list in exam.shijuan">
+        <h2>{{list.examinfo.reporttitle}}</h2>
+        <div v-for="timu in list.examinfo.questioninfo">
+            <h3>{{timu.questionname}}</h3>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th v-for="thead in list.examinfo.accountlist">{{thead.value}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="option in timu.qilist">
+                        <td class="fontleft">{{option.questionitemname}}</td>
+                        <td v-for="show in option.answer">
+                            <i v-show="show.value" class="el-icon-check"></i>
+                        </td>
+                        <td>
+                            <!--<input type="radio" :value="option.id" v-model="timu.check">-->
+                            <el-radio class="radio" v-model="timu.check" :label="option.id"></el-radio>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 </div>
 </template>
 
@@ -42,51 +100,147 @@ export default {
             selfEvaluation:'这是自我介绍哈哈哈哈',
             // 主管评价
             headEvaluation:'',
-            // 题目列表
-            lists:[
-                {
-                    // 题目序号
-                    num:1,
-                    title:'知识和技能',
-                    // 主管radio选项
-                    picked:[],
-                    // table的th
-                    tableTitle:[
-                        {subtitle:'评分标准',weight:'标准分',selfscore:'自评',headscore:'直接上级'}
-                    ],
-                    // 题目内容（题干，权重，员工自打分，主管打分选项）
-                    name:[
-                        {subtitle:'有限的知识和技能，拥有从事本专业工作的基本知识或某一领域的某些知识点，这些知识未在工作中实践过',weight:5,selfscore:'',headscore:''},
-                        {subtitle:'具备基础知识和必要技能，集中于本专业工作的基本知识或某一领域的某些知识点，这些知识在工作中多次实践过',weight:10,selfscore:'',headscore:''},
-                        {subtitle:'具备全面良好的知识和必要技能，主要领域精通，这些知识有相当了解',weight:15,selfscore:'√',headscore:''},
-                        {subtitle:'在本专业领域具有精通、全面的知识和技能',weight:20,selfscore:'',headscore:''}
-                    ]
-                },
-                {
-                    num:2,
-                    title:'技能和知识',
-                    picked:[],
-                    tableTitle:[
-                        {subtitle:'评分标准',weight:'标准分',selfscore:'自评',headscore:'直接上级'}
-                    ],
-                    name:[
-                        {subtitle:'有限的知识和技能，拥有从事本专业工作的基本知识或某一领域的某些知识点，这些知识未在工作中实践过',weight:5,selfscore:'',headscore:''},
-                        {subtitle:'具备基础知识和必要技能，集中于本专业工作的基本知识或某一领域的某些知识点，这些知识在工作中多次实践过',weight:10,selfscore:'√',headscore:''},
-                        {subtitle:'具备全面良好的知识和必要技能，主要领域精通，这些知识有相当了解',weight:15,selfscore:'',headscore:''},
-                        {subtitle:'在本专业领域具有精通、全面的知识和技能',weight:20,selfscore:'',headscore:''}
-                    ]
-                }
-            ]
+            exam:{
+                title:'test',
+                shijuan: [
+                    {
+                        "examinfo": {
+                            "id": 8,
+                            "reportyear": 2017,
+                            "reportquarter": 1,
+                            "questiontype": "职业修养",
+                            "questiontypevalue": 100,
+                            "reporttitle": "测试职业修养",
+                            "accountlist": [{value:"评分标准"},{value:"自评"},{value:"直接上级"}],
+                            "questioninfo": [
+                                {
+                                    "id": 9,
+                                    "qtype": 2,
+                                    "questionname": "题目1",
+                                    "questionvalue": 0,
+                                    "qilist": [
+                                        {
+                                            "id": 1,
+                                            "questionitemname": "有限的知识和技能，拥有从事本专业工作的基本知识或某一领域的某些知识点，这些知识未在工作中实践过",
+                                            "questionitemvalue": 0,
+                                            "answer": [{value:true}]
+                                        },
+                                        {
+                                            "id": 2,
+                                            "questionitemname": "具备基础知识和必要技能，集中于本专业工作的基本知识或某一领域的某些知识点，这些知识在工作中多次实践过",
+                                            "questionitemvalue": 0,
+                                            "answer": [{value:false}]
+                                        },
+                                        {
+                                            "id": 3,
+                                            "questionitemname": "具备全面良好的知识和必要技能，主要领域精通，这些知识有相当了解",
+                                            "questionitemvalue": 0,
+                                            "answer": [{value:false}]
+                                        },
+                                        {
+                                            "id": 4,
+                                            "questionitemname": "在本专业领域具有精通、全面的知识和技能",
+                                            "questionitemvalue": 0,
+                                            "answer": [{value:false}]
+                    
+                                        }
+                                    ],
+                                    showErr:'不能为空',
+                                    check:'',
+                                },
+                                {
+                                    "id": 10,
+                                    "qtype": 2,
+                                    "questionname": "题目2",
+                                    "questionvalue": 0,
+                                    "qilist": [
+                                        {
+                                            "id": 3,
+                                            "questionitemname": "有限的知识和技能，拥有从事本专业工作的基本知识或某一领域的某些知识点，这些知识未在工作中实践过",
+                                            "questionitemvalue": 0,
+                                            "answer": [{value:true}]
+                                        },
+                                        {
+                                            "id": 4,
+                                            "questionitemname": "具备基础知识和必要技能，集中于本专业工作的基本知识或某一领域的某些知识点，这些知识在工作中多次实践过",
+                                            "questionitemvalue": 0,
+                                            "answer": [{value:false}]
+                                        }
+                                    ],
+                                    showErr:'不能为空',
+                                    check:'',
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "examinfo": {
+                            "id": 8,
+                            "reportyear": 2017,
+                            "reportquarter": 1,
+                            "questiontype": "职业修养",
+                            "questiontypevalue": 100,
+                            "reporttitle": "测试职业修养",
+                            "accountlist": [{value:"评分标准"},{value:"自评"},{value:"直接上级"}],
+                            "questioninfo": [
+                                {
+                                    "id": 9,
+                                    "qtype": 2,
+                                    "questionname": "题目1",
+                                    "questionvalue": 0,
+                                    "qilist": [
+                                        {
+                                            "id": 1,
+                                            "questionitemname": "大道",
+                                            "questionitemvalue": 0,
+                                            "answer": [{value:true}]
+                                        },
+                                        {
+                                            "id": 2,
+                                            "questionitemname": "嗯嗯",
+                                            "questionitemvalue": 0,
+                                            "answer": [{value:false}]
+                                        }
+                                    ],
+                                    showErr:'不能为空',
+                                    check:'',
+                                },
+                                {
+                                    "id": 10,
+                                    "qtype": 2,
+                                    "questionname": "题目2",
+                                    "questionvalue": 0,
+                                    "qilist": [
+                                        {
+                                            "id": 3,
+                                            "questionitemname": "111",
+                                            "questionitemvalue": 0,
+                                            "answer": [{value:true}]
+                                        },
+                                        {
+                                            "id": 4,
+                                            "questionitemname": "222",
+                                            "questionitemvalue": 0,
+                                            "answer": [{value:false}]
+                                        }
+                                    ],
+                                    showErr:'不能为空',
+                                    check:'',
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+
+            
         }
     },
+    created(){
+        let relation = this.$route.params.relation;
+        let uid = this.$route.params.uid;
+    },
     methods:{
-        inputShow(key){
-            if(key == 'headscore'){
-                return true;
-            }else{
-                return false;
-            }
-        },
         fontLeft(key){
             if(key == 'subtitle'){
                 return 'fontleft';
@@ -94,8 +248,15 @@ export default {
         },
         total(){
             this.headScore = [];
+
             for(let i = 0;i<this.lists.length;i++){
-                this.headScore.push(this.lists[i].picked)
+                this.lists[i].showErr = false;
+                if(this.lists[i].picked == ''){
+                    this.lists[i].showErr = true;
+                    return false;
+                }else{
+                    this.headScore.push(this.lists[i].picked)
+                }
             }
             this.headScore.push(this.headEvaluation)
         }
@@ -107,7 +268,7 @@ export default {
 table{
     border-collapse:collapse;
     width: 100%;
-    
+
 }
 td,th{
     height: 40px;
@@ -117,6 +278,7 @@ td{
 }
 .fontleft{
     text-align: left;
+    padding-left: 10px;
 }
 .fontleft span{
     margin-left: 5px;
@@ -124,6 +286,9 @@ td{
 .selfEvaluation{
     padding: 5px;
     border: 1px solid rgb(169,169,169);
+}
+.el-radio__label{
+    display: none;
 }
 </style>
 

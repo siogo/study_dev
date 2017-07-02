@@ -3,24 +3,28 @@
     <div class="search">
         <input type="input" v-model="searchMsg"><button @click="search">搜索</button>
     </div>
-    <table border="1">
+    <table border="1" bordercolor='#dfe6ec'>
         <thead>
             <tr>
                 <th v-for="head in list.tableHead">{{head}}</th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="staff in list.staffs" v-show="needShow(staff.dep)">
+            <tr v-for="staff in list.staffs">
                 <td v-for="(option,$index) in staff">  
-                    <span v-if="$index == 'operate'" :class="changeClass(option)">
-                        {{showMsg(option)}}
+                    <span v-if="$index == 'operate'">
+                        <el-button type="success" size="small" v-show="option=='1'?true:false">已完成</el-button>
+                        <el-button type="warning" size="small" v-show="option=='2'?true:false">完成考评</el-button>
+                        <el-button type="info" size="small" v-show="option=='0'?true:false">查看结果</el-button>
                     </span>
-                    <span v-else :class="changeClass($index)" @click="showrouter">{{option}}</span>
+                    <span v-else-if="$index == 'reportOp'">
+                        <el-button type="info" size="small" @click="goWorkreport">工作报告</el-button>
+                    </span>
+                    <span v-else>{{option}}</span>
                 </td>
             </tr>
         </tbody>
     </table>
-    <span>{{searchMsg}}</span>
 </div>
 </template>
 
@@ -43,37 +47,12 @@ export default {
         }
     },
     methods:{
-        showMsg(value){
-            if(value == 0){
-                return '完成考评';
-            }else if(value == 1){
-                return '已完成';
-            }else{
-                return '查看结果';
-            }
-        },
-        changeClass(key){
-            if(key == 0){
-                return 'operateClass';
-            }else if(key == 2){
-                return 'viweClass';
-            }else if(key == 'reportOp'){
-                return 'operateClass';
-            }
-        },
         search(){
             let str = this.searchMsg;
             alert(str);
         },
-        needShow(val){
-            if(val == '客服部'){
-                return true;
-            }else{
-                return false;
-            }
-        },
-        showrouter(){
-            console.log(this.$route);
+        goWorkreport(){
+            this.$router.push({name: '工作报告列表'});
         }
     },
     mounted(){ 
@@ -109,10 +88,15 @@ table{
     width: 100%; 
 }
 td,th{
-    height: 40px;
+    height: 45px;
+    border-color: #dfe6ec;
+    font-size: 14px;
 }
 td{
     text-align: center;
+}
+th{
+    background-color: #eef1f6;
 }
 .operateClass{
     padding: 3px 8px;

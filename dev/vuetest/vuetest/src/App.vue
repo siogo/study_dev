@@ -24,7 +24,19 @@
         <committeeStaff></committeeStaff>
         <h2>-----考评关系-----</h2>
         <relationship></relationship>
-    </div>
+        <h2>-----待办事项员工列表-----</h2>
+        <employeelist></employeelist>
+
+        <div class="block">
+            <span class="demonstration">页数较少时的效果</span>
+            <el-pagination
+                layout="prev, pager, next"
+                :total="50"
+                @current-change="handleCurrentChange"
+                >
+            </el-pagination>
+            </div>
+        </div>
 </template>
 
 <script>
@@ -38,10 +50,16 @@ import committeeSubject from './components/committeeSubject/committeeSubject.vue
 import departmentStaff from './components/departmentStaff/departmentStaff.vue'
 import committeeStaff from './components/committeeStaff/committeeStaff.vue'
 import relationship from './components/relationship/relationship.vue'
+import employeelist from './components/employeeList/employeeList.vue'
 export default {
     data(){
         return {
+            restaurants: [
+                { "value": "李磊", "address": "长宁区新渔路144号" },
+                { "value": "王刚", "address": "上海市长宁区淞虹路661号" }
+            ],
             'message':{'name':'haha','str':'this is father'},
+            state2: ''
         }
     },
     components:{
@@ -54,7 +72,8 @@ export default {
         'evaluation':evaluation,
         'departmentStaff':departmentStaff,
         'committeeStaff':committeeStaff,
-        'relationship':relationship
+        'relationship':relationship,
+        'employeelist':employeelist
     },
     methods:{
         // fathershow(str){
@@ -64,6 +83,23 @@ export default {
         // showCount(){
         //     this.$store.dispatch('incrementsync')
         // }
+        querySearch(queryString, cb) {
+            var restaurants = this.restaurants;
+            var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
+            // 调用 callback 返回建议列表的数据
+            cb(results);
+        },
+        createFilter(queryString) {
+            return (restaurant) => {
+                return (restaurant.value.indexOf(queryString) === 0);
+            };
+        },
+        handleSelect(item) {
+            console.log(item);
+        },
+        handleCurrentChange(val) {
+            console.log(`当前页: ${val}`);
+        }
     },
     computed:{
         // count(){

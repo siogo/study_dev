@@ -6,12 +6,16 @@
 <body>
 <div class="testdiv"></div>
 <script>
-	$ = function(el){
-		return document.querySelector(el);
+	var arr = ['hello','world','fuck'];
+	function check(abc){
+		return function(arr){return (arr.indexOf(abc) === 0);}	
 	}
-
-	var test = $('.testdiv');
-	console.log(test);
+	console.log(arr.filter(check('w')))
+	function result(abc){
+		var res = abc?arr.filter(check(abc)):arr
+		console.log(res);
+	}
+	result()
 </script>
 </body>
 </html>
