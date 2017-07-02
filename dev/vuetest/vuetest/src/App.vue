@@ -8,6 +8,8 @@
         <tableee></tableee>
         <button type="button" @click="showCount()">add</button>
         <p>count:{{count}}</p>-->
+        
+        <!--重要-->
         <h2>-----待办事项-----</h2>
         <todo></todo>
         <h2>-----列表-----</h2>
@@ -24,19 +26,7 @@
         <committeeStaff></committeeStaff>
         <h2>-----考评关系-----</h2>
         <relationship></relationship>
-        <h2>-----待办事项员工列表-----</h2>
-        <employeelist></employeelist>
 
-        <div class="block">
-            <span class="demonstration">页数较少时的效果</span>
-            <el-pagination
-                layout="prev, pager, next"
-                :total="50"
-                @current-change="handleCurrentChange"
-                >
-            </el-pagination>
-            </div>
-        </div>
 </template>
 
 <script>
