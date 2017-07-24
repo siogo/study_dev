@@ -26,7 +26,7 @@
         <committeeStaff></committeeStaff>
         <h2>-----考评关系-----</h2>
         <relationship></relationship>
-
+    </div>
 </template>
 
 <script>

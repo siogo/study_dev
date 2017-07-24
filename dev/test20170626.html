@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title></title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+	<script>
+		var message;
+		console.log(typeof message);
+		console.log(Boolean(typeof age));
+		console.log(Boolean(typeof message))
+		console.log(Boolean('1'))
+		console.log(isNaN(true))
+		console.log(Number(070))
+		console.log(parseInt('070'))
+
+		var num = 0;
+		outer:
+		for(var i = 0;i<10;i++){
+			for(var j = 0;j<10;j++){
+				if(i==5 && j==5){
+					break outer
+				}
+				num++;
+			}
+		}
+		console.log(num)
+
+		var colors = ['hah','heihei','zeze'];
+		console.log(colors.toString());
+		console.log(colors.valueOf());
+		console.log(colors.toLocaleString());
+
+		let arr = ['20','32','2','1000','90'];
+		function compare(value1,value2){
+			return parseInt(value1) -parseInt(value2);
+		}
+		arr.sort(compare);
+		console.log(arr);
+
+		let benjin = 10000;
+		var tatol = benjin;
+		// 日利息
+		let yuebaolilv = 1.1115/10000
+		let licaililv = 0.1;
+		for(let i = 1;i<366;i++){
+			tatol1 = tatol + tatol*yuebaolilv;
+		}
+		console.log(tatol);
+
+		var value = '25';
+		var valuenum1 = Number(value);
+		console.log(typeof(valuenum1));
+
+		var valuenum2 = new Number(value);
+		console.log(typeof(valuenum2))
+
+		var text = "cat,bat,sat,fat";
+		var pattern = /.at/;
+
+		var matches = text.match(pattern);
+		console.log(matches);
+
+		function getg(){
+			return function(){
+				return this;
+			}()
+		}
+
+		var a = getg();
+		console.log(a);
+		
+		var g = function(){
+			return this;
+		}()
+		console.log(g);
+
+
+		var book = {
+			_year:2004,
+			edition:1
+		}
+
+		Object.defineProperty(book,'year',{
+			get:function(){
+				return this._year;
+			},
+			set:function(a){
+				if(a>2004){
+					this._year = a;
+					this.edition++;
+				}
+			}
+		})
+
+		console.log(book.year)
+		console.log(book._year)
+		console.log(book.hasOwnProperty('_year'))
+		
+
+
+		// 20170723
+		function Person(){
+			Person.prototype.name = 'zz';
+			Person.prototype.sayName = function(){
+				console.log(Person.prototype.name);
+			}
+		}
+		var people = new Person();
+		// 构造函数的‘原型对象’
+		console.log(Person.prototype);
+		// 原型对象的constructor属性（指针）指向构造函数
+		console.log(Person.prototype.constructor);
+		// 实例的 __proto__ 属性指向原型对象
+		console.log(people.__proto__)
+		// 等同于 people.__proto__
+		console.log(Object.getPrototypeOf(people));
+		//设置对象的新属性
+		people.name = 'jianggoushi';
+		console.log(people.name) 
+		// 检测对象是否具有属性，如有true
+		console.log(people.hasOwnProperty('name'));
+		// 当删除掉对象的属性之后
+		delete people.name;
+		// 为false
+		console.log(people.hasOwnProperty('name'));
+		// 检测原型的属性,参数（构造函数，属性）
+		console.log(Object.getOwnPropertyDescriptor(Person,'name'))
+	</script>
+	</body>
+</html>

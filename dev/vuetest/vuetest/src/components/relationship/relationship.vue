@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="search">
-        <input type="input" v-model="searchMsg"><button @click="search">搜索</button>
+        <input type="input" v-model="searchMsg" v-focus="{'isfocus':isfocus}"><button @click="search">搜索</button>
     </div>
     <table border="1">
         <thead>
@@ -14,83 +14,10 @@
                 <td v-for="(option,$index) in staff" v-show="$index=='relation'||$index=='choose'?false:true">
                     <span @click="editOperate($index,staff,index)">{{option}}</span>
                 </td>
-                <!--<div class="wrapper" v-show="popshow" >
-                    <div class="inputContainer">
-                        <div class="rowContainer">
-                            <span>上&nbsp;&nbsp;级：</span>
-                            <el-autocomplete
-                                class="inline-input"
-                                v-model="staff[this.index].choosed[0].chooseSup"
-                                :fetch-suggestions="querySearch"
-                                placeholder="请输入内容"
-                                :trigger-on-focus="true"
-                                @select="handleSelect"
-                            ></el-autocomplete>
-                        </div>
-                        <div class="rowContainer">
-                            <span>同事1：</span>
-                            <el-autocomplete
-                                class="inline-input"
-                                v-model="staff.choosed[0].chooseMateOne"
-                                :fetch-suggestions="querySearchOne"
-                                placeholder="请输入内容"
-                                :trigger-on-focus="true"
-                                @select="handleSelect"
-                            ></el-autocomplete>
-                        </div>
-                        <div class="rowContainer">
-                            <span>同事2：</span>
-                            <el-autocomplete
-                                class="inline-input"
-                                v-model="staff.choosed[0].chooseMateTwo"
-                                :fetch-suggestions="querySearchTwo"
-                                placeholder="请输入内容"
-                                :trigger-on-focus="true"
-                                @select="handleSelect"
-                            ></el-autocomplete>
-                        </div>
-                        <div class="rowContainer">
-                            <span>同事3：</span>
-                            <el-autocomplete
-                                class="inline-input"
-                                v-model="staff.choosed[0].chooseMateThree"
-                                :fetch-suggestions="querySearchThree"
-                                placeholder="请输入内容"
-                                :trigger-on-focus="true"
-                                @select="handleSelect"
-                            ></el-autocomplete>
-                        </div>
-                        <div class="rowContainer">
-                            <span>同事4：</span>
-                            <el-autocomplete
-                                class="inline-input"
-                                v-model="staff.choosed[0].chooseMateFour"
-                                :fetch-suggestions="querySearchFour"
-                                placeholder="请输入内容"
-                                :trigger-on-focus="true"
-                                @select="handleSelect"
-                            ></el-autocomplete>
-                        </div>
-                        <div class="rowContainer">
-                            <span>同事5：</span>
-                            <el-autocomplete
-                                class="inline-input"
-                                v-model="staff.choosed[0].chooseMateFive"
-                                :fetch-suggestions="querySearchFive"
-                                placeholder="请输入内容"
-                                :trigger-on-focus="true"
-                                @select="handleSelect"
-                            ></el-autocomplete>
-                        </div> 
-                        <div class="btnContainer">
-                            <el-button type="primary" size="small" @click="closePop()">确定</el-button>
-                        </div>
-                    </div>
-                </div>-->
             </tr>
         </tbody>
     </table>
-    <button @click="show()">取消</button> <button @click="submit()">提交</button>
+    <button @click="submit()">提交</button>
 
     <div class="wrapper" v-show="popshow" @click="closePopup($event)">
         <div class="inputContainer">
@@ -167,7 +94,7 @@
         </div>
     </div>
         
-  
+    <button @click="changefocus()">取消</button> 
 </div>
 </template>
 
@@ -175,6 +102,7 @@
 export default {
     data(){
         return{
+            isfocus:0,
             searchMsg:'',
             submitMsg:[],
             popshow:false,
@@ -274,6 +202,13 @@ export default {
         }
     },
     methods:{
+        changefocus(){
+            if(this.isfocus == 1){
+                this.isfocus = 0;
+            }else{
+                this.isfocus = 1;
+            }
+        },
         search(){
             let str = this.searchMsg;
             alert(str);
@@ -403,7 +338,23 @@ export default {
             }
         },
         poparray(){
-            console.log("shiqujiaodian");
+            // console.log("shiqujiaodian");
+        }
+    },
+    directives:{
+        focus:{
+            update: function (el,binding) {
+                // 聚焦元素
+                // console.log(binding);
+                if(binding.value.isfocus == '1'){
+                    console.log("此时isfocus的值为"+binding.value.isfocus);
+                    // console.log(binding)
+                }else{
+                    console.log("此时isfocus的值为"+binding.value.isfocus);
+                    // console.log(binding)
+                }   
+                   
+            }
         }
     }
 }
