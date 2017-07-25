@@ -102,6 +102,7 @@
 
 
 		// 20170723
+		// 原型模式创建构造函数1.0
 		function Person(){
 			Person.prototype.name = 'zz';
 			Person.prototype.sayName = function(){
@@ -111,23 +112,127 @@
 		var people = new Person();
 		// 构造函数的‘原型对象’
 		console.log(Person.prototype);
+		
 		// 原型对象的constructor属性（指针）指向构造函数
 		console.log(Person.prototype.constructor);
+		
 		// 实例的 __proto__ 属性指向原型对象
 		console.log(people.__proto__)
+		
 		// 等同于 people.__proto__
 		console.log(Object.getPrototypeOf(people));
+		
 		//设置对象的新属性
 		people.name = 'jianggoushi';
 		console.log(people.name) 
+		
 		// 检测对象是否具有属性，如有true
 		console.log(people.hasOwnProperty('name'));
+		
 		// 当删除掉对象的属性之后
 		delete people.name;
+		
 		// 为false
 		console.log(people.hasOwnProperty('name'));
+		
 		// 检测原型的属性,参数（构造函数，属性）
 		console.log(Object.getOwnPropertyDescriptor(Person,'name'))
+
+		// 20170725
+		// 先来一个构造函数,使用构造函数模式
+		function Animal(){
+			this.name = 'cat';
+			this.age = 1;
+			this.sayName = function(){
+				console.log(this.name);
+			}
+		}
+		// 使用构造函数创建一个对象
+		var cat = new Animal();
+		// 打印constructor
+		console.log(cat.constructor);
+		// ps:每个对象都会有一个constructor属性 返回对创建此对象的数组函数的引用，即所有的对象都会有constructor属性，普通的obj指向的应该是Object对象
+		var obj = {
+			name:'test'
+		}
+		console.log(obj.constructor);  //  function Object() { [native code] }
+
+		// 所以对于原型模式构件对象，会手动的将constructor指向构造函数
+		// 原型模式构建对象2.0,构造函数为空函数
+		function Weather(){
+
+		}
+		// 使用原型对象添加属性
+		Weather.prototype = {
+			// 这句手动指向构造函数
+			// constructor:Weather,
+			name:'weather',
+			sayWeather:function(){
+				console.log('weather is :'+this.name)
+			},
+			list:['sun','rain'],
+			addWeather:function(a){
+				this.list.push(a);		
+			}
+		};
+		// 事实上手动添加的constructor属性与自动生成的并不一样，手动添加的属性的[[Enumerable]]为true，所以可以使用
+		Object.defineProperty(Weather.prototype,'constructor',{
+			enumerable:false,
+			value:Weather
+		});
+
+		// 由于原型模式会对引用类型值产生问题，在166行代码添加一个数组array和一个方法addWeather
+		var weather1 = new Weather();
+		var weather2 = new Weather();
+
+		// 调用addWeather方法
+		weather1.addWeather('cloud');
+		// 然后通过weather2打印出list
+		console.log(weather2.list);   //  ["sun", "rain", "cloud"]
+		console.log(weather1.list === weather2.list)  //  true
+
+
+		// 父对象
+		function Fatherobj(){
+			this.value1 = 'father'
+		}
+
+		Fatherobj.prototype.getValue1 = function(){
+			return this.value1;
+		}
+
+		function Childobj(){
+			this.value2 = 'children'
+		}
+
+		Childobj.prototype = new Fatherobj();
+
+		Childobj.prototype.getValue2 = function(){
+			return this.value2;
+		}
+
+		var instan = new Childobj()
+		
+		console.log(Fatherobj.prototype.constructor === Fatherobj);
+		console.log(Childobj.prototype);
+		console.log(Childobj.prototype.constructor);  //Fatherobj
+		console.log(Childobj.prototype.__proto__ === Fatherobj.prototype);  //true
+		console.log(instan.__proto__.__proto__ === Fatherobj.prototype)  //true
+
+		console.log(instan.getValue1());  //father
+		console.log(instan.value1);  //father
+		console.log(instan);
+		console.log(instan.constructor)  //Fatherobj
+		console.log(instan.constructor === Childobj.prototype.constructor)
+		//1 实际上,不是 SubType 的原型的 constructor 属性被重写了,而是 SubType 的原型指向了另一个对象——SuperType 的原型,而这个原型对象的 constructor 属性指向的是 SuperType 。
+
+		//关于原型链
+		//1.[构造函数]的prototype属性指向[构造函数原型对象]。
+		//2.[构造函数原型对象]的constructor属性指向[构造函数]。
+		//3.[构造函数]的[实例]会继承[构造函数原型对象]的属性和方法（包括constructor）
+		//4.[实例]的[__proto__]属性指向[构造函数原型对象]，所以225行代码指向了Fatherobj
+
+
 	</script>
 	</body>
 </html>
