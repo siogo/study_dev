@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div id="test">test1111;
+            <span>email</span>
+        </div>
+    <script>
+        // x = 8;
+        // var x;
+        // console.log(x);
+
+        // var temp = new Date();
+        // function a(){
+        //     console.log(temp);
+        //     // if(true){
+        //     //     var temp = "hhhh";
+        //     // }
+        //     var temp = 'hhhh';
+        // }
+        // a();
+        var test = document.getElementById('test');
+        console.log(test.secendChild);
+        console.log(test);
+
+
+        function func( n ) { 
+            if (n == 0 || n == 1) { 
+                return 1; 
+            } 
+            return func(n-1) + func(n-2); 
+        } 
+        var a = func(5); 
+        console.log(a);
+
+        var obj = {
+            name:'zz',
+            age:25,
+            prototype:2,
+            sayName:function(){
+                console.log(this.name);
+            },
+            toString:function(){
+                console.log(1);
+            }
+        }
+
+        console.log(obj.constructor)
+
+        console.log(obj);
+
+        for(var a in obj){
+            // alert(a);
+        }
+
+        function Animal(){
+            name:'cat'
+        }
+
+        var pig = new Animal();
+        console.log(pig.constructor);
+        console.log(Animal.prototype.constructor);
+
+        var a,b;
+        (function(){
+            function A(arg1,arg2){
+                this.a = 1;
+                this.b = 2;
+            }
+            A.prototype.log = function(){
+                console.log(this.a);
+            }
+            a = new A();
+            b = new A();
+        })();
+        a.log();
+        b.log();
+
+        console.log(a);
+        console.log(a.constructor);
+    </script>
+    </body>
+</html>

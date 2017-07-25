@@ -1,0 +1,22 @@
+{
+  "name": "webpack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "webpack": "undefined3.3.0"
+  },
+  "devDependencies": {
+    "bundle-loader": "^0.5.5",
+    "css-loader": "^0.28.4",
+    "html-webpack-plugin": "^2.29.0",
+    "open-browser-webpack-plugin": "0.0.5",
+    "style-loader": "^0.18.2",
+    "webpack-dev-server": "^2.5.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

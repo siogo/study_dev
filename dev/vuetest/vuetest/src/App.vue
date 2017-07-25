@@ -27,6 +27,9 @@
         <h2>-----考评关系-----</h2>
         <relationship></relationship>
 
+        <!-- <vue-event-calendar :events="demoEvents"></vue-event-calendar> -->
+        <calendar-input :limit="limit"></calendar-input>
+    </div>
 </template>
 
 <script>
@@ -41,15 +44,24 @@ import departmentStaff from './components/departmentStaff/departmentStaff.vue'
 import committeeStaff from './components/committeeStaff/committeeStaff.vue'
 import relationship from './components/relationship/relationship.vue'
 import employeelist from './components/employeeList/employeeList.vue'
+import calendarInput from '../node_modules/calendar-plugin/calendar-input.vue';
 export default {
-    data(){
+    data() {
         return {
             restaurants: [
                 { "value": "李磊", "address": "长宁区新渔路144号" },
                 { "value": "王刚", "address": "上海市长宁区淞虹路661号" }
             ],
-            'message':{'name':'haha','str':'this is father'},
-            state2: ''
+            'message': { 'name': 'haha', 'str': 'this is father' },
+            state2: '',
+            demoEvents: [{
+                date: '2016/12/15',
+                title: 'eat',
+                desc: 'longlonglong description'
+            }, {
+                date: '2016/11/12',
+                title: 'this is a title'
+            }]
         }
     },
     components:{
@@ -63,7 +75,8 @@ export default {
         'departmentStaff':departmentStaff,
         'committeeStaff':committeeStaff,
         'relationship':relationship,
-        'employeelist':employeelist
+        'employeelist':employeelist,
+        calendarInput
     },
     methods:{
         // fathershow(str){
@@ -92,9 +105,9 @@ export default {
         }
     },
     computed:{
-        // count(){
-        //     return this.$store.state.count;
-        // }
+        count(){
+            return this.$store.state.count;
+        }
     }
 }
 </script>

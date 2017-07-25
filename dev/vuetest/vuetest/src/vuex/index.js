@@ -1,23 +1,31 @@
-import Vue from 'vue'
 import Vuex from 'vuex'
-import mutations from './mutations.js'
-import getters from './getters.js'
-import actions from './actions.js'
-Vue.use(Vuex)
+import Vue from 'vue'
 
-const state = {
-    count: 0,
-    title: 'vuex',
-    todos:[
-        {id:1,text:'...',done:true},
-        {id:2,text:'...',done:false}
-    ],
-    START_PARMA: {}
+state:{
+    list:['afwefefdsaergdsa','fefafaa','faefsdfaefaeffdaef','fefaefef','fefsf'],
+    showChildComponent:true,
+    message:'给各个组件的消息'
+},
+mutations:{
+    add(state,data){
+        state.list.push(data);
+    }
+},
+actions:{
+    add({commit,state},data){
+        setTimeout(function(){
+            commit('add',data);
+        },2000);
+    }
+},
+getters:{
+    filterList(state){
+        let len = state.list.length,
+        newList;
+        for(let i=0;i<len;i++){
+            let element = state.list[i];
+            element.length>10?newList.push(element):null;
+        }
+        return newList;
+    }
 }
-
-export default new Vuex.Store({
-    state,
-    getters,
-    mutations,
-    actions
-})
