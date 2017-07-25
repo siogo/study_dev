@@ -26,9 +26,12 @@
         <committeeStaff></committeeStaff>
         <h2>-----考评关系-----</h2>
         <relationship></relationship>
+<<<<<<< HEAD
 
         <!-- <vue-event-calendar :events="demoEvents"></vue-event-calendar> -->
         <calendar-input :limit="limit"></calendar-input>
+=======
+>>>>>>> 09ef97ee97edd85f1316173bf1c4a819f56432a9
     </div>
 </template>
 
