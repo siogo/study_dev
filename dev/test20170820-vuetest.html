@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title></title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<div id="app">
+			<input type="text" v-model="text">
+			{{text}}
+		</div>
+
+		<script>
+			function nodeToFragment(node,vm){
+				var flag = document.createDocumentFragment();
+				var child;
+				while(child = node.firstChild){
+					// console.log(child);
+					complie(child,vm);
+					flag.appendChild(child);
+				}
+				return flag;
+			}
+
+			function complie(node,vm){
+				var reg = /\{\{(.*)\}\}/;
+				if(node.nodeType === 1){
+					var attrs = node.attributes;
+					for(var i = 0;i<attrs.length;i++){
+						if(attrs[i].nodeName == 'v-model'){
+							var name = attrs[i].nodeValue;
+							node.addEventListener('input',function(e){
+								vm[name] = e.target.value;
+							})
+							node.value = vm[name];
+							node.removeAttribute('v-model');
+						}
+					}
+				}
+				if(node.nodeType === 3){
+					let result = reg.test(node.nodeValue);
+					if(result){
+						var name = RegExp.$1;
+						node.nodeValue = vm[name];
+					}
+				}
+			}
+
+			function defineReactive(obj, key ,val){
+				Object.defineProperty(obj,key,{
+					get:function(){
+						return val;
+					},
+					set:function(newVal){
+						if(newVal === val){
+							return ''
+						}else{
+							val = newVal;
+							console.log(val)
+						}
+					}
+				})
+			}
+
+			function observe(obj,vm){
+				Object.keys(obj).forEach(function(key){
+					defineReactive(vm,key,obj[key]);
+				})
+			}
+
+			function Vue(option){
+				this.data = option.data;
+				var id = option.el;
+				observe(this.data,this);
+				var dom = nodeToFragment(document.getElementById(id),this);
+				document.getElementById(id).appendChild(dom)
+			}
+
+			var vm = new Vue({
+				el:'app',
+				data:{
+					text:'hello world'
+				}
+			})
+
+			var obj = {a:'1'};
+			Object.keys(obj).forEach(function(key){
+				console.log(obj[key])
+			});
+		</script>
+	</body>
+</html>

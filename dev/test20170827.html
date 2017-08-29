@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function showthis(){
+			console.log('此时的this是：'+this);
+		}
+		var obj = {}
+		obj.a = showthis;
+		showthis();
+		obj.a();
+		obj.a.apply(window);
+
+		// 理清楚了apply
+
+		// // 发布和订阅模式
+		// var showobj = {};
+		// showobj.list = [];
+		// showobj.listen = function(fn){
+		// 	showobj.list.push(fn);
+		// }
+		// console.log(showobj);
+
+		// showobj.trigger = function(){
+		// 	for(var i,fn;fn=this.list[i++];){
+		// 		fn.apply(this,arguments);
+		// 	}
+		// }
+
+		// // first people
+		// showobj.listen(function(color,size){
+		// 	console.log('first people的颜色为：'+color);
+		// 	console.log('first people的尺寸为：'+size);
+		// })
+
+		// // second people
+		// showobj.listen(function(color,size){
+		// 	console.log('second people的颜色为：'+color);
+		// 	console.log('second people的尺寸为：'+size);
+		// })
+
+		// console.log(showobj)
+		var arr = [1,2,3,4,5];
+		// console.log(Array.prototype.shift.apply(arr));
+		// console.log(arr);
+
+
+
+		// 改写
+		var showobj = {};
+		showobj.list = [];
+		showobj.listen = function(key,fn){
+			if(!this.list[key]){
+				this.list[key] = [];
+				this.list[key].push(fn);
+			}
+		}
+
+		showobj.trigger = function(){
+			var key = Array.prototype.shift.call(arguments);
+			var fns = this.list[key];
+			// console.log(fns)
+
+			if(!fns){
+				return '';
+			}
+
+			var fn = fns[0];
+			fn.apply(this,arguments);
+			
+		}
+
+		// first people
+		showobj.listen('red',function(size){
+			console.log('first people的尺寸为：'+size);
+		})
+
+		// second people
+		showobj.listen('blue',function(size){
+			console.log('second people的尺寸为：'+size);
+		})
+
+		console.log(showobj);
+		showobj.trigger('red',40);
+		showobj.trigger('blu',50);
+	</script>
+</body>
+</html>
