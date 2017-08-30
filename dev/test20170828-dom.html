@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM</title>
+</head>
+<body>
+    <div id="app">
+        <span>this is a span</span>
+        <span name="second">this is second span</span>
+        this is text dom
+    </div>
+    <p id="p">this is a p</p>
+<script>
+    var app = document.getElementById('app');
+    // childNodes返回一个类数组的对象
+    var appChild = app.childNodes;
+    console.log(typeof(appChild)); // object
+    console.log(appChild);
+    // 可以用数组的方法
+    // 子元素的方法 parentNode,previousSibling,nextSibling
+    appChild.forEach(function(node){
+        console.log(node.nodeType);
+        console.log("父节点为："+node.parentNode.nodeName)
+    })
+
+    // 插入节点appendChild,insertBefore
+    // appendChild在节点的最后插入节点
+    var p = document.getElementById('p');
+    app.appendChild(p);
+    console.log(app.childNodes);
+    // insertBefore在指定节点之前插入节点
+    // replaceChild替换节点
+    // removeChild移除节点
+
+    // document类型
+    var url = document.URL;
+    console.log(url);
+    var domain = document.domain;
+    console.log(domain);
+
+    // document.getElementByTagName,返回一个 HTMLcollection
+    var span = document.getElementsByTagName('span');
+    console.log(span)
+
+    // HTMLcollection有一个方法 namedItem()
+    var second = span.namedItem('second');
+    console.log(second);
+</script>
+</body>
+</html>
