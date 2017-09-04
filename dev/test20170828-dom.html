@@ -5,12 +5,14 @@
     <title>DOM</title>
 </head>
 <body>
-    <div id="app">
+    <div id="app" data-test="test">
         <span>this is a span</span>
         <span name="second">this is second span</span>
         this is text dom
     </div>
     <p id="p">this is a p</p>
+
+    <div id="text">元素节点<span>元素节点中的p节点</span></div>
 <script>
     var app = document.getElementById('app');
     // childNodes返回一个类数组的对象
@@ -46,6 +48,72 @@
     // HTMLcollection有一个方法 namedItem()
     var second = span.namedItem('second');
     console.log(second);
+
+    // Element 元素
+    // nodeType,nodeValue,nodeName,parentNode
+    // 应该是专指‘标签元素’，例如<span><p>
+
+    // 所有的Html元素 都由 HTMLElement 元素类型表示 ，此类型继承于Element
+    // Element元素的dom操作属性方法,html元素的所有特性都是属性，
+    // setAttribute();
+    // getAttribute();
+    // removeAttribute();
+    // 特性即属性
+    console.log(app.id);  //会打印出app；
+    // 也能设置特性
+    app.id = 'test';
+    console.log(app.id);  //会打印出test，浏览器中的代码id也会变为test
+    
+    // attributes是元素的属性集合，有四个方法 getNamedItem,setNamedItem,removeNamedItem,item，作用等同于dom操作属性方法
+    var div1 = document.getElementsByTagName('div');
+    var attr = div1[0].attributes.getNamedItem('id').nodeValue;
+    console.log(div1[0]);
+    console.log(attr);
+    console.log(div1[0].attributes.length);
+    console.log(div1[0].attributes.item(1));
+
+
+    // 元素节点 Text
+    var textContent = document.getElementById('text');
+    var textContentChild = textContent.childNodes;
+    console.log(textContentChild);
+    var splitText;
+    for(let a= 0;a<textContentChild.length;a++){
+        // 在这里出现一个问题就是如果html中有换行的话，也会被记入textContentChild元素中，值为换行符，至于‘元素节点中的p节点’这句话在id='text'这个元素中取不到，相应的应该在span中去取
+        // nodeValue == data;ps:在文本节点中
+        console.log('此节点的名称为：'+textContentChild[a].nodeName+',此节点的类型为：'+textContentChild[a].nodeType+',此节点的值为：'+textContentChild[a].nodeValue);
+        if(textContentChild[a].nodeType == 3){
+            textContentChild[a].appendData('hahahaha');
+            textContentChild[a].deleteData(2,1);
+            textContentChild[a].insertData(2,'charudexinjiedian');
+            textContentChild[a].replaceData(2,3,'this is new');//第二个参数为个数，不是终止位置
+            // textContentChild[a].splitText(2);
+            splitText = textContentChild[a];
+        }
+    }
+    // textContent.appendData('hahahah');只针对文本节点，nodeType == 3；
+    var str = splitText.splitText(11);//只返回了分割后的第二段字符串，且str是个对象
+    console.log(typeof(str))
+    for(var b in str){
+        console.log(b);
+    }
+    console.log(str);
+
+
+    // 操作table
+    var table = document.createElement('table');
+    table.width = "100%";
+    table.border = 1;
+    var thead = table.createTHead();
+    thead.insertRow(0);
+    var td1 = thead.rows[0].insertCell(0).appendChild(document.createTextNode('this is td1'));
+    var td2 = thead.rows[0].insertCell(1).appendChild(document.createTextNode('this is td2'));
+
+    var tbody = table.createTBody();
+    var testtr = tbody.insertRow(0); //返回的是对tr的引用
+    console.log(testtr);
+    var body = document.getElementsByTagName('body')[0];
+    body.appendChild(table);
 </script>
 </body>
 </html>
