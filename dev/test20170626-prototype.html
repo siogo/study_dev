@@ -265,29 +265,7 @@
 		
 
 
-		// 第八章
-		// 创建函数的两种方法，函数声明和函数表达式
-		function test(){} //函数声明
-		var test1 = function(){} //函数表达式
-
-		console.log(test.name);
-		console.log(test1.name)
-
-		// 递归函数
-		function test2(num){
-			if(num <= 1){
-				return num;
-			}else{
-				// return num*test2(num-1);
-				// 改写test2
-				return num*arguments.callee(num-1);
-			}
-		}
-
-		console.log(test2(5));
-		var flag = test2;
-		test2 = null;
-		console.log(flag(5)); //test2 is not a function,因为test2的指针已经被置为null，281行中的代码不会有test2这个函数
+		
 
 	</script>
 	</body>
