@@ -28,10 +28,21 @@
         }
     }
 
-    obj.getNameFunc();
-    (obj.getNameFunc)();
-    console.log((obj.getNameFunc = obj.getNameFunc)())
+    // obj.getNameFunc();
+    // (obj.getNameFunc)();
+    // console.log((obj.getNameFunc = obj.getNameFunc)())
     // console.log(obj.getNameFunc()());  // the window，因为匿名函数的执行环境具有全局性，所以this通常指向window
+
+    function foo(){
+        // eval(str);
+        var b = 7;
+        return function(){
+            console.log(b);
+        }
+    }
+    // var b = 1
+    foo()();
+    
 </script>
 </body>
 </html>

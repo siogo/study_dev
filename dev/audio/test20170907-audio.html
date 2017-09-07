@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="ie7/ie7.css">
+    <title>Document</title>
+    <style>
+        body{margin: 0;padding: 0}
+        i{
+            font-size: 36px;
+        }
+        .bar{
+            width: 520px;
+            height: 50px;
+            background: #F6F6F8;
+            position: relative;
+        }
+        .bar .notPlay{
+            height: 4px;
+            background: #C2C2C4;
+            width: 436px;
+            position: absolute;
+            top: 23px;
+            left: 42px;
+            cursor: pointer;
+        }
+        .bar .Played{
+            height: 4px;
+            background: #E83C3C;
+            width: 1px;
+            position: absolute;
+            top: 23px;
+            left: 42px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <audio id="audio" src="./media/yisibugua.mp3" type="audio/mpeg"></audio><br>
+    <i id="pause" class="icon-pause"></i>
+    <i class="icon-per"></i>
+    <i class="icon-next"></i>
+    <i id="play" class="icon-play"></i>
+
+    <div class="bar">
+
+        <div class="notPlay" onclick="change(event)"></div>
+        <div class="Played" onclick="change(event)"></div>
+    </div>
+    <script>
+        const width = 436;
+        var audio = document.getElementById('audio');
+        
+        var playButton = document.getElementById('play');
+        var pauseButton = document.getElementById('pause');
+        var played = document.getElementsByClassName('Played')[0];
+        var notPlay = document.getElementsByClassName('notPlay')[0];
+        var duration,timer;
+        var str = 0;
+        // 获得歌曲时间
+        audio.addEventListener('canplay',function(){
+            duration = Math.floor(parseInt(audio.duration));
+        })
+
+        playButton.onclick = function(){
+            audio.play();
+            barRun();
+        }
+
+        pauseButton.onclick = function(){
+            audio.pause();
+            clearInterval(timer);
+        }
+
+        function change(event){
+            var changeWidth = event.layerX;
+            var changePer = changeWidth/width;
+            var changeTime = duration*changePer;
+            audio.currentTime = changeTime;
+            played.style.width = changeWidth + 'px';
+            str = changeWidth;
+        }
+
+        function barRun(){
+            // 每秒走过的px
+            widthPreSecend = width/duration/2;
+            timer = setInterval(function(){
+                str = str + widthPreSecend;
+                if(str >= width){
+                    clearInterval(timer);
+                }else{
+                    played.style.width = str+'px';
+                } 
+            },500)
+        }
+    </script>
+</body>
+</html>
