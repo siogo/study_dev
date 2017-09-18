@@ -1,9 +1,11 @@
 const readline = require('readline');
 const fs = require('fs');
+const path = require('path');
 
 const point = {
     creatHtml: function () {
-        let input = fs.createReadStream('../input/input.txt');
+        // let input = fs.createReadStream('../input/input.txt');
+        let input = fs.createReadStream(path.join(__dirname, "../input/input.txt"))
 
         // 将每行读到的数据保存在一个数组中
         let dataArr = [];
@@ -19,7 +21,6 @@ const point = {
             }
         });
         rl.on('close', (line) => {
-            console.log(dataArr);
             let ulstart = '<ul class=\"printDisplay_feature\">';
             let ulend = '<\/ul>';
             let str = '';
@@ -28,7 +29,8 @@ const point = {
             }
             let ul = ulstart + str + ulend;
             // console.log(ul);  
-            fs.writeFileSync('../output/point.html', ul)
+            // fs.writeFileSync('../output/point.html', ul);
+            fs.writeFileSync(path.join(__dirname, "../output/point.html"),ul)
         });
     }
 }
