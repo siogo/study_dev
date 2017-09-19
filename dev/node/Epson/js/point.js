@@ -1,8 +1,8 @@
 const readline = require('readline');
 const fs = require('fs');
 
-const point = {
-    creatHtml: function () {
+// const point = {
+//     creatHtml: function () {
         let input = fs.createReadStream('../input/input.txt');
 
         // 将每行读到的数据保存在一个数组中
@@ -30,7 +30,7 @@ const point = {
             // console.log(ul);  
             fs.writeFileSync('../output/point.html', ul)
         });
-    }
-}
+//     }
+// }
 
-module.exports = point;
+// module.exports = point;
