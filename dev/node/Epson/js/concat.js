@@ -11,7 +11,7 @@ const concat = {
         k.creatHtml();
     },
     concatHtml: function () {
-        let point = fs.readFile(path.join(__dirname, "../output/point.html"))
+        let point = fs.readFileSync(path.join(__dirname, "../output/point.html"))
         let keyspec = fs.readFileSync(path.join(__dirname, "../output/keyspec.html"))
         let str = point + keyspec;
 
