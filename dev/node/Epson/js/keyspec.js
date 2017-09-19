@@ -1,9 +1,11 @@
 const readline = require('readline');
 const fs = require('fs');
+const path = require('path');
 
 const keyspec = {
     creatHtml: function () {
-        let input = fs.createReadStream('../input/keyspec.txt');
+        // let input = fs.createReadStream('../input/keyspec.txt');
+        let input = fs.createReadStream(path.join(__dirname, "../input/keyspec.txt"))
 
         // 将每行读到的数据保存在一个数组中
         let dataArr = [];
@@ -29,7 +31,9 @@ const keyspec = {
             }
             let ul = ulstart + str + ulend;
             // console.log(ul);  
-            fs.writeFileSync('../output/keyspec.html', ul)
+            // fs.writeFileSync('../output/keyspec.html', ul)
+            fs.writeFileSync(path.join(__dirname, "../output/keyspec.html"),ul)
+            
         });
     }
 }
