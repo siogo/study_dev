@@ -2,8 +2,8 @@ const readline = require('readline');
 const fs = require('fs');
 const path = require('path');
 
-const keyspec = {
-    creatHtml: function () {
+// const keyspec = {
+//     creatHtml: function () {
         // let input = fs.createReadStream('../input/keyspec.txt');
         let input = fs.createReadStream(path.join(__dirname, "../input/keyspec.txt"))
 
@@ -33,9 +33,9 @@ const keyspec = {
             // console.log(ul);  
             // fs.writeFileSync('../output/keyspec.html', ul)
             fs.writeFileSync(path.join(__dirname, "../output/keyspec.html"),ul)
-            
+            console.log(`keyspec.html创建成功`);
         });
-    }
-}
+//     }
+// }
 
-module.exports = keyspec;
+// module.exports = keyspec;

@@ -2,8 +2,8 @@ const readline = require('readline');
 const fs = require('fs');
 const path = require('path');
 
-const point = {
-    creatHtml: function () {
+// const point = {
+//     creatHtml: function () {
         // let input = fs.createReadStream('../input/input.txt');
         let input = fs.createReadStream(path.join(__dirname, "../input/input.txt"))
 
@@ -30,9 +30,10 @@ const point = {
             let ul = ulstart + str + ulend;
             // console.log(ul);  
             // fs.writeFileSync('../output/point.html', ul);
-            fs.writeFileSync(path.join(__dirname, "../output/point.html"),ul)
+            fs.writeFileSync(path.join(__dirname, "../output/point.html"),ul);
+            console.log(`point.html创建成功`);
         });
-    }
-}
+//     }
+// }
 
-module.exports = point;
+// module.exports = point;
