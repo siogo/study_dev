@@ -1,8 +1,7 @@
-const { spawn } = require('child_process');
-const grep = spawn('grep', ['ssh']);
+var baidu = require('./baidu-ocr');
 
-grep.on('close', (code, signal) => {
-  console.log(`子进程收到信号 ${signal} 而终止`);
-});
+console.log(baidu);
 
-// 发送 SIGHUP 到进程
+var square = baidu(2);
+
+console.log(square.area());
