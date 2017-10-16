@@ -1,7 +1,5 @@
 var baidu = require('./baidu-ocr');
-
-console.log(baidu);
-
-var square = baidu(2);
-
-console.log(square.area());
+console.log(require.main.filename);
+console.log(__filename)
+console.log(module.filename)
+console.log(module.paths);

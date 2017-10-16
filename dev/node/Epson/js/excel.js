@@ -8,13 +8,8 @@ var excelObj = obj[0].data;
 var str = '';
 var smallpoint;
 var keyspecIndex;
-<<<<<<< HEAD
-var keystr = '';
-for(var i = 0;i<excelObj.length;i++){
-=======
 var keyspecs = [];
 for(let i = 0;i<excelObj.length;i++){
->>>>>>> 332db4fd5c15afc358bf8a0fbe1e07b9fd1e780a
     if(excelObj[i][0] == '概述小点'){
         smallpoint = excelObj[i];
     }
