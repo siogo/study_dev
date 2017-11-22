@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function Foo(name){
+			this.name = name
+		}
+
+		Foo.prototype.myName = function(){
+			return this.name;
+		}
+
+		function Bar(name,label){
+			Foo.call(this,name);
+			this.label = label;
+		}
+
+		console.log(Foo.prototype);
+		Bar.prototype = Object.create(Foo.prototype);
+
+		console.log(Bar.prototype.__proto__);
+	</script>
+</body>
+</html>

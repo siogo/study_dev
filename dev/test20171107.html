@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+<script>
+	function mixin(sourceObj,targetObj){
+		for(var i in sourceObj){
+			targetObj[i] = sourceObj[i];
+		}
+
+		return targetObj;
+	}
+
+	var aaa = {
+		wheels: 1,
+		fuck:1
+	}
+
+	var car = mixin(aaa,{});
+
+	mixin({
+		shit:000,
+		fuck:2
+	},car)
+
+	console.log(car);
+</script>
+</body>
+</html>

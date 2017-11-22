@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function MyString(str){
+			let i = 0;
+			let arr = [];
+
+			while(str[i]){
+				arr.push(str[i]);
+				i++;
+			}
+			
+			this.length = arr.length;
+			
+			for(let j = 0;j<arr.length;j++){
+				this[j] = arr[j];
+			}
+
+			this.toString = function() {
+				let str = '';
+				for(let i=0;i<arr.length;i++){
+					str = str + arr[i];
+				}
+				return str;
+			};
+
+			this.valueOf = function() {
+				return this.toString();
+			};
+
+			this.charAt = function(index) {
+				if(typeof(index) != 'number'){
+					index = index * 1;
+					if(typeof(index) != 'number'){
+						return 'Type Error';
+					}else{
+						return arr[index];
+					}
+				}else{
+					return arr[index];
+				}
+			}
+
+			this.concat = function(str){
+				return this.valueOf() + str;
+			}
+
+			this.slice = function(num1,num2){
+				num1 = num1<0?num1+arr.length:num1;
+				num2 = num2<0?num2+arr.length:num2;
+				if(num1>arr.length && num2>arr.length){
+					return 'Type Error';
+				}else{
+					if(num1 > num2){
+						let temp = num1;
+						num1 = num2;
+						num2 = temp;
+						
+					}
+					let str = '';
+					let newArr = arr.slice(num1,num2);
+					for(let i=num1;i<newArr.length;i++){
+						str = str + arr[i];
+					}
+					return str;
+				}
+			}
+
+			this.split = function(str){
+				let strIndex = [0];
+				let newArr = [];
+				for(let i = 0;i<arr.length;i++){
+					if(arr[i] == str){
+						strIndex.push(i);
+					}
+				}
+				
+				strIndex.push(arr.length);
+				for(let i=0;i<strIndex.length-1;i++){
+					if(i == 0){
+						newArr.push(arr.slice(strIndex[i],strIndex[i+1]));
+					}else{
+						newArr.push(arr.slice(strIndex[i]+1,strIndex[i+1]));
+					}
+					
+				}
+				return newArr;
+			}
+		}
+
+		var s = new MyString('hello');
+		console.log(s.length);
+		console.log(s[1]);
+		console.log(s.toString());
+		console.log(s.valueOf());
+		console.log(s.charAt('2'))
+		console.log(s.concat(' world'));
+		console.log(s.slice(0,1));
+		console.log(s.split('l'));
+	</script>
+</body>
+</html>
