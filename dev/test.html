@@ -1,21 +1,359 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+	<title></title>
+	<meta charset="utf-8">
 </head>
 <body>
 <div class="testdiv"></div>
 <script>
-	var arr = ['hello','world','fuck'];
-	function check(abc){
-		return function(arr){return (arr.indexOf(abc) === 0);}	
+	// var arr = [1,2,3];
+	// for(var i = 0;i<arr.length;i++){
+	// 	// arr[i] = function(){
+	// 	// 	return i;
+	// 	// }
+
+	// 	arr[i] = (function(i){
+	// 		var a = i;
+	// 		console.log(a);
+	// 		return function(a){
+	// 			return a;
+	// 		}
+	// 	})(i)
+	// }
+	// arr[0]();
+	// console.log(arr[0]())
+	// console.log(arr[1]());
+
+	// function F(){
+	// 	function C(){
+	// 		console.log(this);
+	// 		return this;
+	// 	}
+	// 	return C();
+	// }
+
+	// var o  = new F();
+
+	// function B(){
+	// 	this.a = 1;
+	// 	return false;
+	// }
+	// console.log(typeof new B());
+
+	// var str = 'hello 5555';
+	// let arr = [];
+	// let i = 0;
+
+	// while (str[i]) {
+	// 	console.log(1)
+	// 	arr.push(str[i])
+	// 	i++;
+	// }
+
+	// console.log(arr);
+
+	// for(var i in str){
+	// 	console.log(str[i]);
+	// }
+
+	// function MyString(str){
+	// 	let arr = [];
+	// 	let i = 0;
+	// 	while (str[i]) {
+	// 		arr.push(str[i])
+	// 		i++;
+	// 	}
+	// 	this.length = arr.length;
+	// 	for(let j = 0;j<arr.length;j++){
+	// 		this[j] = arr[j];
+	// 	}
+	// }
+
+	// var s = new MyString('hello');
+	// console.log(s.length);
+	// console.log(s[4])
+
+	// var arr = new Array(1,2,3);
+	// console.log(Object.prototype.hasOwnProperty.call(arr,'length'));   //true 即arr中没有length这个属性，这个属性是原型链上的
+	// console.log(arr.hasOwnProperty('length'));
+
+	// var str = new String('hello');
+	// console.log(str.hasOwnProperty('length'));
+
+	// function Z(str){
+	// 	this.str = str;
+	// 	return function (){
+	// 		console.log(this.str);
+	// 	};
+	// }
+	// Z('hello');
+	// var z = new Z('hello')
+	// console.log(z());
+
+
+	var xuuu = 123;
+	function test() {
+		var xuuu = 456;
+		this.aa = 6666;
+		return function () {
+			console.log(this)
+			console.log(xuuu);
+			console.log(this.aa);
+			console.log(this.xuuu);
+		};
+
+	};
+	var sdf = new test();
+	console.log(sdf)
+	sdf();
+	test()();
+
+	String.prototype.reverse = function(){
+		return Array.prototype.reverse.call(this.split('')).join('');
 	}
-	console.log(arr.filter(check('w')))
-	function result(abc){
-		var res = abc?arr.filter(check(abc)):arr
-		console.log(res);
+
+	console.log('hello'.reverse())
+
+console.log('**********************')
+
+	// var shape = {
+	// 	type : 'shape',
+	// 	getType:function(){
+	// 		return this.type;
+	// 	}
+	// }
+
+	// function Triangle(a,b,c){
+	// 	this.a = a;
+	// 	this.b = b;
+	// 	this.c = c;
+	// 	this.type = 'triangle'
+	// }
+
+	// Triangle.prototype = shape;
+	// Triangle.prototype.constructor = Triangle;
+	// Triangle.prototype.getPerimeter = function(){
+	// 	return this.a + this.b + this.c;
+	// }
+
+	// var t = new Triangle(1,2,3);
+	// console.log(t);
+	// console.log(t.constructor === Triangle);
+	// console.log(shape.isPrototypeOf(t));
+	// console.log(t.getPerimeter());
+	// console.log(t.getType());
+
+	// for(var i in t){
+	// 	if(t.propertyIsEnumerable(i)){
+
+	// 	}else{
+	// 		console.log(i);
+	// 	}
+	// }
+
+console.log('**********************')	
+
+var str = '3-5*6-7/8*9+7*5-5*2';
+function computed(str){
+	let temp;
+	// let arr = str.split('');
+	// for(let i=0;i<arr.length;i++){
+	// 	if(arr[i] == '*' || arr[i] == '/'){
+	// 		temp = method(arr[i-1],arr[i],arr[i+1]);
+	// 		arr.splice(i-1,1,temp);
+	// 	}
+	// }
+	let arr = str.split('-');
+	let tempArr = [];
+	let tempArr2 = [];
+	let indexArr = [];
+	tempArr2 = str.split('');
+	for(let i = 0;i<arr.length;i++){
+		let temp = arr[i].split('+');
+		if(temp.length>1){
+			for(let j=0;j<temp.length;j++){
+				tempArr.push(temp[j]);
+				indexArr.push(temp[j]);
+			}
+		}else{
+			tempArr.push(temp[0]);
+			indexArr.push(temp[0]);
+		}
 	}
-	result()
+	console.log(tempArr);
+	for(let i=0;i<tempArr.length;i++){
+		if(tempArr[i].length>1){
+			console.log(tempArr[i])
+			while(tempArr[i].length > 2){
+				let subStr = tempArr[i].toString().substring(0,3);
+				let subArr = subStr.split('');
+				let result = method(subArr[0],subArr[1],subArr[2]);
+				console.log(result);
+				tempArr[i] = result.toString() + tempArr[i].substring(3);
+			}
+			
+		}else{
+
+		}
+	}
+
+
+	// for(let i = 0;i<tempArr.length;i++){
+	// 	console.log('tempArr之前：'+tempArr[i]);
+	// 	tempArr[i] = tempArr[i].toString().split('');
+	// 	console.log(tempArr[i])
+	// 	if(tempArr[i].length > 1){
+	// 		let index = str.indexOf(indexArr[i]);
+	// 		let length = indexArr[i].toString().length;
+	// 		while(tempArr[i].length > 1){
+	// 			let result = method(tempArr[i][0], tempArr[i][1], tempArr[i][2]);
+	// 			tempArr[i].splice(0,3,result);
+	// 			console.log(tempArr[i]);
+	// 			// tempArr2.splice(indexArr.indexOf(tempArr[i]),tempArr[i].length,tempArr[i].splice(0, 3, result))
+	// 			// console.log(str.replace(indexArr[i].toString(), tempArr[i]));
+				
+	// 		}		
+	// 	}
+	// 	str = str.replace(indexArr[i].toString(), tempArr[i]);
+	// 	console.log(str)
+	// }
+	// console.log(tempArr);
+	// console.log(str);
+	// console.log(indexArr);
+	// console.log(str)
+	// console.log(str.indexOf(tempArr[1].toString()));
+}
+
+
+
+function method(num1,operate,num2){
+	switch (operate) {
+		case '+':
+			return num1 + num2;
+			break;
+		case '-':
+			return num1 - num2;
+			break;
+		case '*':
+			return num1 * num2;
+			break;
+		case '/':
+			return num1 / num2;
+			break;
+		default:
+			break;
+	}
+}
+
+// computed(str);
+
+
+console.log('**********************');
+
+// let randArr = window.crypto.getRandomValues(new Int8Array(16));
+// for(let i = 0;i<randArr.length;i++){
+// 	if(randArr[i] > 128){
+// 		console.log('>>>>');
+// 	}else{
+//  		console.log('<<<<<');
+// 	}
+// }
+
+console.log('**********************111');
+
+// function Shape(){}
+
+// Shape.prototype.name = 'Shape';
+
+// function Triangle(height,bottom){
+// 	this.height = height;
+// 	this.bottom = bottom;
+// }
+
+// Triangle.prototype = new Shape();
+
+// Triangle.prototype.getArea = function(){
+// 	return this.height*this.bottom/2;
+// }
+
+// var triangle = new Triangle(5,10);
+// console.log(triangle);
+
+// new F()临时绑定
+// function Shape(){}
+// Shape.prototype.name = 'Shape';
+// Shape.prototype.toString = function(){
+// 	return this.constructor.uber;
+// }
+
+// function Triangel(height,bottom){
+// 	this.height = height;
+// 	this.bottom = bottom;
+// }
+
+// function F(){}
+// F.prototype = Shape.prototype;
+// Triangel.prototype = new F();
+
+// Triangel.prototype.constructor = Triangel;
+// Triangel.uber = Shape.prototype;
+
+// Triangel.prototype.getArea = function(){
+// 	return this.height*this.bottom / 2;
+// }
+
+// Triangel.prototype.name = 'triangle';
+
+// var triangle = new Triangel(4,5);
+// var shape = new Shape();
+
+// var a = triangle.toString()
+// console.log(a);
+
+
+function Shape(){}
+Shape.prototype.name = 'shape';
+Shape.prototype.toString = function(){
+	var c = this.constructor;
+	console.log(c);
+	console.log(c.uber);
+	console.log(this.name);
+	
+	var a = c.uber ? c.uber.toString() + ', ' + this.name : this.name;
+	return a;
+}
+
+function TwoDShape(){}
+var F = function(){}
+F.prototype = Shape.prototype;
+TwoDShape.prototype = new F();
+TwoDShape.prototype.constructor = TwoDShape;
+TwoDShape.uber = Shape.prototype;
+TwoDShape.prototype.name = '2D shape';
+
+function Triangle(side, height){
+	this.side = side;
+	this.height = height;
+}
+var F = function () { }
+F.prototype = TwoDShape.prototype;
+Triangle.prototype = new F();
+Triangle.prototype.constructor = Triangle;
+Triangle.uber = TwoDShape.prototype;
+Triangle.prototype.name = 'Triangle';
+Triangle.prototype.getArea = function(){
+	return this.side*this.height/2
+}
+
+var my = new Triangle(5,10);
+console.log(my.toString())
+
+
+
+	
+
+
 </script>
 </body>
 </html>

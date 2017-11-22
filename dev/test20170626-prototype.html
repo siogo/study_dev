@@ -265,8 +265,79 @@
 		
 
 
-		
+		//20171122
+		// 对于继承来讲，应该在对原型对象进行拓展之前，完成继承关系的构建，否则后续的新内容有可能会抹掉我们继承的东西；
+		// 282行这段代码如果在280行这段代码之前，那么getArea这个方法会被覆盖掉，且对Triangle拓展的方法以及属性其实是在Shape上
+		function Shape() { }
 
+		Shape.prototype.name = 'Shape';
+
+		function Triangle(height, bottom) {
+			this.height = height;
+			this.bottom = bottom;
+		}
+
+		Triangle.prototype = new Shape();
+		Triangle.prototype.constructor = Triangle;
+		Triangle.prototype.getArea = function () {
+			return this.height * this.bottom / 2;
+		}
+
+		var triangle = new Triangle(5, 10);
+		console.log(triangle);
+
+		// 这是为了提高查找原型链上的方法或者属性的效率的一种变形，即将父级的原型赋值给子级的原型，这样做虽然会增加效率，但是一旦子级的原型发生改变，父级的原型也会发生改变
+		function Shape() { }
+		Shape.prototype.name = 'Shape';
+
+		function Triangel(height, bottom) {
+			this.height = height;
+			this.bottom = bottom;
+		}
+
+		Triangel.prototype = Shape.prototype;
+		Triangel.prototype.constructor = Triangel;
+
+		Triangel.prototype.getArea = function () {
+			return this.height * this.bottom / 2;
+		}
+
+		var triangle = new Triangel(5, 10);
+		console.log(triangle);
+
+		Triangel.prototype.name = 'triangle';
+		Triangel.prototype.test = 'test';
+		var shape = new Shape();
+		var triangle2 = new Triangel(3,9)
+		console.log(shape);
+		console.log(triangle2)
+
+		// new F() 即是为上面的问题产生的解决方法，通过一个中间件，阻止父级发生改变
+		function Shape() { }
+		Shape.prototype.name = 'Shape';
+
+		function Triangel(height, bottom) {
+			this.height = height;
+			this.bottom = bottom;
+		}
+
+		function F() { }
+		F.prototype = Shape.prototype;
+		Triangel.prototype = new F();
+
+		Triangel.prototype.constructor = Triangel;
+
+		Triangel.prototype.getArea = function () {
+			return this.height * this.bottom / 2;
+		}
+
+		Triangel.prototype.name = 'triangle';
+
+		var triangle = new Triangel(4, 5);
+		var shape = new Shape();
+
+		console.log(triangle);
+		console.log(shape);
 	</script>
 	</body>
 </html>
