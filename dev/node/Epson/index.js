@@ -35,3 +35,11 @@ const child4 = execFile('node',[path.join(__dirname,'./js/gaishu-2.js')],functio
 		console.log(stdout);
 	}
 })
+
+const child5 = execFile('node',[path.join(__dirname,'./js/icon.js')],function(err,stdout,stderr){
+	if(err){
+		console.log(err);
+	}else{
+		console.log(stdout);
+	}
+})

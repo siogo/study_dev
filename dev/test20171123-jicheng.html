@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // function objectPlus(o,staff){
+    //     function F(){};
+    //     F.prototype = o;
+    //     let n = new F();
+    //     n.uber = o;
+
+    //     for(let i in staff){
+    //         n[i] = staff[i];
+    //     }
+
+    //     return n;
+    // }
+
+    // var shape = {
+    //     name:'shape',
+    //     toString:function(){
+    //         var a = this.name;
+    //         return a;
+    //     }
+    // }
+
+    // var twoDee = objectPlus(shape,{
+    //     name :'twoDee',
+    //     toString:function(){
+    //         var b = this.uber.toString() + ', ' + this.name;
+    //         return b;
+    //     }
+    // })
+
+    // var triangle = objectPlus(twoDee,{
+    //     name:'triangle',
+    //     getArea:function(){
+            
+    //     },
+    //     height:0,
+    //     side:0
+    // })
+
+    // var my = objectPlus(triangle,{
+    //     side:4,height:4
+    // })
+
+    // console.log(my)
+
+    // console.log(my.toString())
+
+    // function A(id){
+    //     this.id = id;
+    // }
+
+    // function B(){
+    //     A.apply(this,arguments);
+    // }
+
+    // B.prototype = new A(100);
+    // var c = new B(200);
+    // console.log(c.id)
+    // console.log(c.hasOwnProperty('id'))
+    // delete c.id;
+
+    // console.log(c.id);
+    // console.log(c.hasOwnProperty('id'))
+
+
+
+    function Shape(id){
+        this.id = id;
+    }
+
+    function Triangle(){
+        Shape.apply(this,arguments);
+    }
+
+    Triangle.prototype = new Shape(100);
+
+    var t = new Triangle(200);
+    console.log(t)
+
+    // 如您所见，对象中有一个自身属性id，但他并非来自原型链中
+    console.log(t.__proto__.id);
+
+    delete t.id;
+
+    console.log(t.id)
+    console.log(t.hasOwnProperty('id'))
+</script>
+</body>
+</html>

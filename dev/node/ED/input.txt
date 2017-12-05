@@ -1,0 +1,10 @@
+Airbag ECU
+images/automotive_07.gif
+Abbreviation*Definition
+CAN*Controller Area Network
+MCU*Micro Controller Unit
+----
+&nbsp;*Category*Model*Frequency, feature*Object
+A*MHz Crystal*(contact us)*12MHz to 60MHz*3.2x2.5x1.0mm
+B*Gyro Sensor*XV-9100CD,XV-9300CD*Analog Output, AEC-Q100, Up tp 105 degree*5.0x5.0x1.4mm
+B*Gyro Sensor*XV-9100LV,XV-9300LV,XV-9100LP,XV-9300LP*Analog Output, AEC-Q100, Up to 125 degree*LV : 7.0x6.8x3.3mm LP : 9.5x5.0x7.2mm
