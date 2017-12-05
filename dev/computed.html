@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+    <script>
+        function method(num1, op, num2) {
+                switch (op) {
+                    case '+':
+                        return num1 + num2;
+                        break;
+                    case '-':
+                        return num1 - num2;
+                        break;
+                    case '*':
+                        return num1 * num2;
+                        break;
+                    case '/':
+                        return num1 / num2;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+        // console.log(method(3, '*', 5));
+        let str = '3*5*8*7';
+        let index;
+        function computed(str){
+            index = str.indexOf('*');
+            if(index > -1){
+                str1 = str.substring(0,index);
+                str2 = str.substring(index+1);
+                computed(str1);
+                computed(str2);
+            } else{
+                console.log()
+            }
+        }
+
+        computed(str);
+    </script>
+    </body>
+</html>
