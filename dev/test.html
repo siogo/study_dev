@@ -7,7 +7,6 @@
 <body>
 <div class="testdiv"></div>
 <script>
-<<<<<<< HEAD
 	// var arr = ['hello','world','fuck'];
 	// function check(abc){
 	// 	return function(arr){return (arr.indexOf(abc) === 0);}	
@@ -66,7 +65,6 @@
 	var a = F();
 	console.log(a[0]())
 	// console.log(a[0],a[1],a[2]);
-=======
 	// var arr = [1,2,3];
 	// for(var i = 0;i<arr.length;i++){
 	// 	// arr[i] = function(){
@@ -409,12 +407,45 @@ Triangle.prototype.getArea = function(){
 var my = new Triangle(5,10);
 console.log(my.toString())
 
+var abc = {
+	arr: [1,2,3]
+}
+
+console.log(typeof(abc.arr));
 
 
+var parent = {
+	numbers: [1,2,3],
+	letters: ['a','b','c'],
+	obj:{
+		prop:1
+	},
+	bool: true
+};
+
+function deepcopy(p,c){
+	c = c || {};
+	for(var i in p){
+		if(p.hasOwnProperty(i)){
+			if(typeof(p[i]) === 'object'){
+				if(Array.isArray(p[i])){
+					c[i] = [];
+					deepcopy(p[i],c[i]);
+				}else{
+					c[i] = {};
+					deepcopy(p[i],c[i]);
+				}
+			}else{
+				c[i] = p[i]
+			}
+		}
+	}
+	return c;
+}
+var mydeep = deepcopy(parent);
 	
 
 
->>>>>>> 696541db59689289f64d6ea83b69adab9bbbc2b3
 </script>
 </body>
 </html>
