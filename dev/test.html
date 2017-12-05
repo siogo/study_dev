@@ -7,6 +7,66 @@
 <body>
 <div class="testdiv"></div>
 <script>
+<<<<<<< HEAD
+	// var arr = ['hello','world','fuck'];
+	// function check(abc){
+	// 	return function(arr){return (arr.indexOf(abc) === 0);}	
+	// }
+	// console.log(arr.filter(check('w')))
+	// function result(abc){
+	// 	var res = abc?arr.filter(check(abc)):arr
+	// 	console.log(res);
+	// }
+	// result()
+
+	// var a = (function(){
+	// 	function setValue(){
+	// 		var setup = 'hahahaha';
+	// 	}
+
+	// 	function aaa(){
+	// 		alert('test aaa');
+	// 	}
+
+	// 	setValue();
+	// 	return aaa;
+	// }())
+
+	// var a = 'global';
+	// var F = function(){
+	// 	var b = 'is F zoom';
+	// 	var N = function(){
+	// 		var c = 'is N zoom'
+	// 	}
+	// 	return N;
+	// }
+	// var test1 = F();
+
+	// function setup(x){
+	// 	var i = 0;
+	// 	return function(){
+	// 		return x[i++]
+	// 	}
+	// }
+	// var next = setup(['a','b','c']);
+	// next();
+
+	function F(){
+		var arr = [],i;
+		for(i = 0;i < 3;i++){
+			arr[i] = (function(x){
+				return function(){
+					return x;
+				}
+			})(1)
+		}
+		return arr;
+	}
+
+	var a = F();
+	console.log(a[0]())
+	// console.log(a[0],a[1],a[2]);
+=======
 	// var arr = [1,2,3];
 	// for(var i = 0;i<arr.length;i++){
 	// 	// arr[i] = function(){
@@ -395,6 +455,7 @@ console.log(test3,test3.constructor);
 	
 
 
+>>>>>>> 696541db59689289f64d6ea83b69adab9bbbc2b3
 </script>
 </body>
 </html>
