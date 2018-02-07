@@ -31,6 +31,7 @@ export default {
 	},
 	created(){
 		this.headers.Authorization = this.$store.getters.access_token;
+		console.log(this.$options)
 	},
 	methods:{
 		getResult(msg){

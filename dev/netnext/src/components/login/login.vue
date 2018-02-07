@@ -124,12 +124,12 @@ export default {
         },
         submit(){
             console.log(1);
-            if(this.validate()){
+            // if(this.validate()){
                 console.log(this.loginObj);
                 this.loginFilter(this.loginObj)
                 // 发起登陆请求，成功设置token以及vuex
                 
-            }
+            // }
         },
         changeCode(){
             this.getCodeFilter();
