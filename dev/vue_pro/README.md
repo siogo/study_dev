@@ -1,4 +1,4 @@
-# netnext
+# vue_pro
 
 > A Vue.js project
 
