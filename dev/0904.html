@@ -1,14 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+
+    </style>
+    <script src="https://cdn.bootcss.com/lodash.js/4.17.10/lodash.core.js"></script>
 </head>
+
 <body>
+    <div class="red blue">123</div>
+    <div class="blue red">123</div>
     <script>
-        
+        var arr = [1,4,6,34,76,13,45]
+        arr.sort(function(a,b){
+            return a-b<0
+        })
+        console.log(arr);
     </script>
 </body>
+
 </html>

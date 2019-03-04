@@ -1,0 +1,16 @@
+<!--pages/test/list.wxml-->
+<view class='listCont'>
+  <text>list</text>
+  <swiper autoplay>
+    <block wx:for="{{swiperData}}" wx:key="">
+      <swiper-item>
+        <image src="{{item}}" class='imageClass'></image>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view>
+    <block wx:for="{{listData}}" wx:key="id">
+      <text class='itemClass' bindtap='showId' id='{{item.id}}' data-songname='{{item.name}}'>{{item.name}}</text>
+    </block>
+  </view>
+</view>

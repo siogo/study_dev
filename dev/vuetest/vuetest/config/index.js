@@ -23,6 +23,7 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
+    devtool: '#source-map',
     port: 1234,
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',

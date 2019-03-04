@@ -114,6 +114,10 @@ export default {
     },
     created(){
         console.log(this.lists2);
+        let set = new Set([1,2,3,564,232,222,1]);
+        console.log([...new Set(set)]);
+        let a = 3;
+        let b = 4;
     }
 }
 </script>

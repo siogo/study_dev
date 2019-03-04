@@ -1,0 +1,26 @@
+<!--pages/play/play.wxml-->
+<view>
+  <text class='title'>{{songName}}</text>
+  <block>
+    <image class='songimage' src='{{imgurl}}'></image>
+  </block>
+  <view style='display:flex;justify-content:space-between;align-items:center;width:720rpx;margin:20rpx auto;'>
+    <text style='width:10%;font-size:10px;text-align:center'>{{nowtime}}</text>
+    <slider style='width:80%' block-size="16" max="{{duration}}" value="{{slidernowtime}}" bindchange="slidebar" step='1'></slider>
+    <text style='display:inline-block;width:10%;font-size:10px;text-align:center'>{{duration}}</text>
+  </view>
+  <view style='display:flex;justify-content:space-around;align-items:center;margin-top:40rpx;'>
+    <view>
+      <image style='width:70rpx;height:70rpx;display:block' src='../../static/icon/prev.png'></image>
+    </view>
+    <view wx:if="{{!isPlay}}" bindtap="audioPlay">
+      <image style='width:100rpx;height:100rpx;display:block' src='../../static/icon/bofang.png'></image>
+    </view>
+     <view wx:if="{{isPlay}}" bindtap="audioPause">
+      <image style='width:100rpx;height:100rpx;display:block' src='../../static/icon/bofangzanting.png'></image>
+    </view>
+    <view>
+      <image style='width:70rpx;height:70rpx;display:block' src='../../static/icon/next.png'></image>
+    </view>
+  </view>
+</view>

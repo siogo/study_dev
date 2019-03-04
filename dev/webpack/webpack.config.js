@@ -1,24 +1,49 @@
-var webpack = require('webpack');
-var OpenBrowserPlugin = require('open-browser-webpack-plugin');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const webpack = require('webpack');
 
-var devFlagPlugin = new webpack.DefinePlugin({
-    _DEV_:JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
-});
-console.log('webpack_config:'+process.env.DEBUG)
 module.exports = {
-    entry: './main.js',
-    output: {
-        path: __dirname, // 输出文件的保存路径
-        filename: 'bundle.js' // 输出文件的名称
-    },
-    module:{
-        loaders:[
-            {
-                test:/\.css$/,
-                loader:'style-loader!css-loader',
-                exclude:/node_modules/
-            }
-        ]
-    },
-    plugins:[devFlagPlugin]
-}
+	// entry: './src/index.js',
+	entry:{
+		// app:'./src/index.js'
+		index: './src/index.js',
+		// another: './src/another-module.js'
+		vendor:[
+			'lodash'
+		]
+	},
+	output: {
+		// filename: 'bundle.js',
+		// filename:'[name].bundle.js',
+		// chunkFilename: '[name].bundle.js',
+		filename:'[name].[chunkhash].js',
+		path: path.resolve(__dirname, 'dist'),
+		// publicPath: '/'
+	},
+	plugins:[
+		new HtmlWebpackPlugin({
+			title: 'Output Management'
+		}),
+		new CleanWebpackPlugin(['dist']),
+		new webpack.NamedModulesPlugin(),
+		// 热更新与hash冲突
+		// new webpack.HotModuleReplacementPlugin(),
+		// 去除多余未被使用的代码
+		new UglifyJSPlugin(),
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'vendor'
+		}),
+		// 提取公共模块代码
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'manifest'
+		}),
+		
+	],	
+	devtool:'inline-source-map',
+	devServer: {
+		contentBase: './dist',
+		hot: true
+	},
+};

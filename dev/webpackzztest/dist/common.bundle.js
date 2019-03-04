@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[0],[function(n,t,u){"use strict";function r(n){return n*n}u.d(t,"a",function(){return r})},function(n,t,u){"use strict";u.r(t),u.d(t,"squireAndSum",function(){return c});var r=u(0);function c(n,t){return Object(r.a)(n)+Object(r.a)(t)}}]]);

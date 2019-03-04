@@ -1,2 +1,9 @@
-var a:number = '222';
-console.log(typeof(a));
+function timeout(ms){
+	return new Promise((resolve,reject)=>{
+		setTimeout(resolve,ms,'done');
+	})
+}
+
+timeout(300).then((result)=>{
+	console.log(result);
+})

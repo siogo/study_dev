@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<p>输入一个1-100的数字</p>
+	<input type="text" id="text">
+	<button id="btn" onclick="getvalue()">confirm</button>
+	<button id="reset" onclick="reset()">reset</button>
+	<a href="http://www.baidu.com"></a>
+	<script>
+		var random = Math.ceil(Math.random()*100+1);
+		console.log(random);
+		var cishu = 10;
+		function getvalue(){
+			var text = document.getElementById("text").value;
+			if(cishu==0){
+				alert('没机会了')
+			}else{
+				if(text>=1&&text<=100){
+					if(text == random){
+						alert("猜对了")
+						random = Math.ceil(Math.random()*100+1);
+						cishu = 10;
+						document.getElementById("text").value = '';
+					}else{
+						cishu = cishu-1;
+						alert("猜错了,还有"+cishu+"次");
+					}
+				}else{
+					alert("超过范围")
+				}
+			}
+			
+		}
+
+		function reset(){
+			random = Math.ceil(Math.random()*100+1);
+			cishu = 10;
+			document.getElementById("text").value = '';
+		}
+		// console.log(text);
+	</script>
+</body>
+</html>

@@ -10,6 +10,8 @@
         <p>count:{{count}}</p>-->
         
         <!--重要-->
+        <h2>-----proxytest-----</h2>
+        <proxy></proxy>
         <h2>-----待办事项-----</h2>
         <todo></todo>
         <h2>-----列表-----</h2>
@@ -26,16 +28,14 @@
         <committeeStaff></committeeStaff>
         <h2>-----考评关系-----</h2>
         <relationship></relationship>
-<<<<<<< HEAD
 
         <!-- <vue-event-calendar :events="demoEvents"></vue-event-calendar> -->
-        <calendar-input :limit="limit"></calendar-input>
-=======
->>>>>>> 09ef97ee97edd85f1316173bf1c4a819f56432a9
+        <!-- <calendar-input :limit="limit"></calendar-input> -->
     </div>
 </template>
 
 <script>
+import proxy from './components/proxytest/proxytest.vue';
 import textcom from './components/vuetest/testcom.vue';
 import todo from './components/todoThing/todoThing.vue';
 import evaluationList from './components/evaluationList/evaluationList.vue'
@@ -68,6 +68,7 @@ export default {
         }
     },
     components:{
+        proxy,
         'textcom':textcom,
         'todo':todo,
         'subject':subject,
@@ -108,9 +109,9 @@ export default {
         }
     },
     computed:{
-        count(){
-            return this.$store.state.count;
-        }
+        // count(){
+        //     return this.$store.state.count;
+        // }
     }
 }
 </script>

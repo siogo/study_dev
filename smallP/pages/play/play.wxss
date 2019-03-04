@@ -1,0 +1,16 @@
+/* pages/play/play.wxss */
+
+.songimage{
+  width: 720rpx;
+  height: 720rpx;
+  display: block;
+  margin: 0 auto;
+}
+
+.title{
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin: 20rpx auto;
+  font-size: 48rpx;
+}

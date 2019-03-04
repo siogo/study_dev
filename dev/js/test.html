@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+<script>
+var params = {
+	params_1:{
+		person_1:{
+			name:'person_1',
+			age:'44'
+		},
+		person_2:{
+			name:'person_2',
+			age:'55'
+		},
+		person_3:'person_3'
+	},
+	params_2:{
+		animal_1:{
+			name:'cat',
+			sound:'miao'
+		},
+		animal_2:{
+			name:'dog',
+			sound:'wang'
+		}
+	},
+	params_3:{
+		food_1:{
+			name:'pork'
+		},
+		food_2:{
+			name:'beef'
+		},
+		food_3:'food_3'
+	},
+	params_4:{
+		fruit_1:{
+			name:'banana',
+			color:'yellow'
+		},
+		fruit_2:{
+			name:'apple',
+			color:'red'
+		}
+	},
+	params_5:{
+		drink_1:{
+			name:'Coke'
+		},
+		drink_2:{
+			name:'fanta'
+		}
+	}
+}
+
+var params2 = {
+	params_1:{
+		person_1:{
+			name:'person_1',
+			age:'44'
+		},
+		person_2:{
+			name:'person_2',
+			age:'55'
+		},
+		person_3:'person_3'
+	},
+	params_2:{
+		animal_1:{
+			name:'cat',
+			sound:'miao'
+		},
+		animal_2:{
+			name:'dog',
+			sound:'wang'
+		}
+	},
+	params_3:{
+		food_1:{
+			name:'pork'
+		},
+		food_2:{
+			name:'beef'
+		},
+		food_3:'food_3'
+	},
+	params_4:{
+		fruit_1:{
+			name:'banana',
+			color:'yellow'
+		},
+		fruit_2:{
+			name:'apple',
+			color:'red'
+		}
+	},
+	params_5:{
+		drink_1:{
+			name:'Coke'
+		},
+		drink_2:{
+			name:'fanta1'
+		}
+	}
+}
+
+var isModefy = false;
+
+function a(targetObj,newObj){
+	return Object.keys(targetObj).map(function(item){
+		if(typeof(targetObj[item]) == 'object'){
+			return a(targetObj[item],newObj[item]);
+		}else{
+			if(targetObj[item] != newObj[item]){
+				isModefy = true;
+			}
+		}
+	})
+}
+
+a(params,params2)
+
+console.log(isModefy);
+
+</script>
+</body>
+</html>
